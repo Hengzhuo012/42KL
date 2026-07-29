@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/29 12:45:20 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/29 14:33:58 by zheng            ###   ########.fr       */
+/*   Created: 2026/07/29 15:35:10 by zheng             #+#    #+#             */
+/*   Updated: 2026/07/29 16:11:56 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	size;
-
-	size = 0;
-	while (lst)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }
 /*
+//need to test with valgrind
 #include <stdio.h>
-int main(void)
+void	del(void *content)
 {
-	t_list	*head;
-	t_list	*next_node;
+	free(content);
+}
 
-	head = ft_lstnew("Node 2");
-	ft_lstadd_front(&head, ft_lstnew("Node 1"));
-    printf("Size: %d\n", ft_lstsize(head));
-	while (head)
-	{
-		next_node = head->next;
-		free(head);
-		head = next_node;
-	}
+int	main(void)
+{
+	t_list	*start;
+	char	*str;
+
+	str = malloc(1 * sizeof(char));
+	str[0] = 'c';
+	start = ft_lstnew(str);
+	printf("Before: %s\n", (char *)start->content);
+	ft_lstdelone(start, del);
 }
 */
