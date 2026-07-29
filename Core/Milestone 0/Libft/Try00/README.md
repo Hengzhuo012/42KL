@@ -16,9 +16,9 @@ List of commands to run with a description.
 List of references and description of how AI was used.
 * [Man Pages] - https://man7.org/linux/man-pages/
 * **Usage of AI**
-* * **AI used** - Gemini and Google AI Overview
-* * **Debugging** - Check for edge cases that got ignored or some infinite loop made. For example, checking if the passed function is NULL.
-* * **Explaination** - Understanding functions better for more complex functions such as ft_lstmap for when del function is used.
+	* **AI used** - Gemini and Google AI Overview
+	* **Debugging** - Check for edge cases that got ignored or some infinite loop made. For example, checking if the passed function is NULL.
+	* **Explaination** - Understanding functions better for more complex functions such as ft_lstmap for when del function is used.
 
 ## Library
 Functions created in the library with a detailed description.
