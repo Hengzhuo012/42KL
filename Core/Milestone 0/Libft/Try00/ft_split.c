@@ -21,12 +21,12 @@ int	ft_arr_size(char *str, char c)
 	words = 0;
 	while (str[i])
 	{
-		while (str[i] && is_sep(str[i], c))
+		while (str[i] && str[i] == c)
 			i++;
-		if (str[i] && !is_sep(str[i], c))
+		if (str[i] && str[i] != c)
 		{
 			words++;
-			while (str[i] && !is_sep(str[i], c))
+			while (str[i] && str[i] != c)
 				i++;
 		}
 	}
