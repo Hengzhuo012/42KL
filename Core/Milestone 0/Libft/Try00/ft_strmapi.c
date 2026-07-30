@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 14:01:59 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 14:18:48 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/31 00:16:48 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	char			*arr;
 
+	if (!s || !f)
+		return (NULL);
 	len_s = ft_strlen(s);
 	arr = malloc((len_s + 1) * sizeof(char));
 	if (!arr)
@@ -40,7 +42,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	return (arr);
 }
-
 /*
 #include <stdio.h>
 

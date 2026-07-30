@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 11:20:09 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 12:41:40 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 23:29:41 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = 0;
 	return (str);
 }
-
 /*
 #include <stdio.h>
 int	main(void)

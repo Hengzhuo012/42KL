@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 12:44:15 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 13:02:36 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/31 00:04:33 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ int	ft_set_start(char const *s1, char const *set)
 	return (start);
 }
 
+int	ft_set_end(char const *s1, char const *set)
+{
+	int	end;
+
+	end = ft_strlen(s1) - 1;
+	while (ft_isset(s1[end], set))
+		end--;
+	return (end);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;
@@ -54,10 +64,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		i;
 	char	*str;
 
+	if (!s1 || !set)
+		return (NULL);
 	start = ft_set_start(s1, set);
-	end = ft_strlen(s1) - 1;
-	while (ft_isset(s1[end], set))
-		end--;
+	end = ft_set_end(s1, set);
 	size = end - start + 1;
 	if (size < 0)
 		return (NULL);
@@ -73,7 +83,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str[i] = 0;
 	return (str);
 }
-
 /*
 #include <stdio.h>
 int	main(void)

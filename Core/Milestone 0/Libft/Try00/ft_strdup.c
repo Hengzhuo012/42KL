@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 10:34:21 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 10:44:41 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 22:41:30 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s)
 	size_t	i;
 	char	*str;
 
+	if (!s)
+		return (NULL);
 	len = 0;
 	while (s[len])
 		len++;
@@ -26,14 +28,14 @@ char	*ft_strdup(const char *s)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (i <= len)
+	while (i < len)
 	{
 		str[i] = s[i];
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }
-
 /*
 #include <stdio.h>
 int	main(void)
@@ -41,7 +43,7 @@ int	main(void)
 	char	*src;
 	char	*new_str;
 
-	src = "test\0";
+	src = "test";
 	printf("Source: %s\n", src);
 	new_str = ft_strdup(src);
 	printf("New: %s\n", new_str);

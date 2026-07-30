@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 10:45:34 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 11:32:44 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 22:57:01 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	s_len = ft_strlen(s);
 	if (start >= s_len)
-		return (ft_strdup(s));
+		return (ft_strdup(""));
 	if (len > s_len - start)
 		len = s_len - start;
 	str = malloc((len + 1) * sizeof(char));
@@ -69,7 +69,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = 0;
 	return (str);
 }
-
 /*
 #include <stdio.h>
 int	main(void)

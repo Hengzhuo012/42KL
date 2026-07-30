@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 13:29:32 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 14:01:30 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 23:47:25 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*ft_itoa(int n)
 	}
 	return (arr);
 }
-
 /*
 #include <stdio.h>
 int	main(void)

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 10:06:29 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 10:34:09 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 22:33:50 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		cptr[i++] = 0;
 	return (ptr);
 }
-
 /*
 #include <stdio.h>
 int	main(void)

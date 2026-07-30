@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 09:56:34 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 13:29:11 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 23:43:45 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,12 @@ char	**ft_split(char *str, char c)
 		return (NULL);
 	return (ft_create_array(str, c, arr));
 }
-
 /*
 #include <stdio.h>
 int	main(void)
 {
 	char	**arr;
-	int	i;
+	int		i;
 
 	i = 0;
 	arr = ft_split("test:hello", ':');
