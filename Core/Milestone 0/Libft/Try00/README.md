@@ -9,7 +9,7 @@ Libft is the first project from 42 core programme. It is part of Milestone 0.
 List of commands to run with a description.
 * `make` - Compiles all source files into 'libft.a'.
 * `make clean` - Removes object files.
-* `make fclean' - Removes object files and 'libft.a'.
+* `make fclean` - Removes object files and 'libft.a'.
 * `make re` - Performs 'fclean' followed by 'make'.
 
 ## Resources
