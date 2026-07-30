@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 12:37:36 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 12:57:56 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 16:01:18 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(void)
 	dest1[3] = 0;
 	memcpy(dest2, src2, 3);
 	dest2[3] = 0;
-	printf("dest1, %s\n", dest1);
-	printf("dest2, %s\n", dest2);
+	printf("Mine, %s\n", dest1);
+	printf("Real, %s\n", dest2);
 }
 */

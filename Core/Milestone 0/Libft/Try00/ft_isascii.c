@@ -6,15 +6,13 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 10:26:06 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 10:37:56 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 15:54:03 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }
 
 /*
@@ -27,7 +25,7 @@ int	main(void)
 	a = 'h';
 	b = 130;
 
-	printf("%d, is %d\n", a, ft_isascii(a));
-	printf("%d, is %d\n", b, ft_isascii(b));
+	printf("%c, is %d\n", (char)a, ft_isascii(a));
+	printf("%c, is %d\n", (char)b, ft_isascii(b));
 }
 */

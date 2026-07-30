@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 11:21:06 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 12:37:20 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 16:01:20 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(void)
 
 	ft_bzero(str1, 5);
 	bzero(str2, 5);
-	printf("str1 = %s\n", str1);
-	printf("str2 = %s\n", str2);
+	printf("Mine = %s\n", str1);
+	printf("Real = %s\n", str2);
 }
 */

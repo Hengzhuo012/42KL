@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 14:57:11 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 15:00:11 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 16:28:11 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ char	*ft_strrchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 		i++;
-	i++;
-	while (i || s[i] == (char)c)
+	while (i >= 0)
 	{
 		if (s[i] == (char)c)
 			return ((char *)&s[i]);

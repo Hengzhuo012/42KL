@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 15:06:06 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 15:11:05 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 16:29:52 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(void)
 	char	s2[] = "Test2";
 	int		n = 5;
 
-	printf("%d\n", ft_strncmp(s1, s2, n));
-	printf("%d\n", strncmp(s1, s2, n));
+	printf("Mine: %d\n", ft_strncmp(s1, s2, n));
+	printf("Real: %d\n", strncmp(s1, s2, n));
 }
 */

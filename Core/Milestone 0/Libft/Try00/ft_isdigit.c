@@ -6,15 +6,13 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 10:16:54 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 10:19:51 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 15:47:32 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int n)
 {
-	if (n >= '0' && n <= '9')
-		return (1);
-	return (0);
+	return (n >= '0' && n <= '9');
 }
 
 /*
@@ -24,10 +22,10 @@ int	main(void)
 	int	a;
 	int	b;
 
-	a = 4;
+	a = 'c';
 	b = '4';
 
-	printf("%d, is %d\n", a, ft_isdigit(a));
-	printf("%d, is %d\n", b, ft_isdigit(b));
+	printf("%c, is %d\n", (char)a, ft_isdigit(a));
+	printf("%c, is %d\n", (char)b, ft_isdigit(b));
 }
 */

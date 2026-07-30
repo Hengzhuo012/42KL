@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 10:38:18 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 14:18:18 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 15:55:26 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	main(void)
 	char	*str;
 
 	str = "Hello World";
-	printf("%s have %zu characters\n", str, ft_strlen(str));
+	printf("\"%s\" have %zu characters\n", str, ft_strlen(str));
 }
 */

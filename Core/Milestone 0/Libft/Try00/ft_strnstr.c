@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 09:25:04 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/28 09:43:47 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 16:57:36 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	while (big[i] && i < len)
 	{
 		j = 0;
-		while (big[i + j] == little[j] && (i + j) < len
+		while ((i + j) < len && big[i + j] == little[j]
 			&& big[i + j] && little[j])
 		{
 			j++;
@@ -44,9 +44,9 @@ int	main(void)
 	const char	*little;
 	size_t		n;
 
-	big = "This is a test string";
-	little = "test";
-	n = 100;
+	big = "AABC";
+	little = "ABC";
+	n = 4;
 	printf("Real: %s\n", strnstr(big, little, n));
 	printf("Mine: %s\n", ft_strnstr(big, little, n));
 }

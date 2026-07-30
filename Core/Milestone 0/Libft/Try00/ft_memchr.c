@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 15:11:27 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 15:29:45 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 16:43:18 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (str[i] == (unsigned char)c)
-			return ((void *)&s[i]);
+			return ((void *)&str[i]);
 		i++;
 	}
 	return (0);

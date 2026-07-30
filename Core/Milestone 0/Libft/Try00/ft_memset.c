@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 10:41:32 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/27 12:29:43 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/30 15:58:20 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(void)
 	str1[5] = '\0';
 	memset(str2, 'h', 5);
 	str2[5] = '\0';
-	printf("str1 = %s\n", str1);
-	printf("str2 = %s\n", str2);
+	printf("Mine = %s\n", str1);
+	printf("Real = %s\n", str2);
 }
 */
