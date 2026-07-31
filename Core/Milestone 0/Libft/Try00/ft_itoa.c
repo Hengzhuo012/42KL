@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*int_min(void)
+static char	*int_min(void)
 {
 	char	*arr;
 
@@ -34,7 +34,7 @@ char	*int_min(void)
 	return (arr);
 }
 
-int	ft_nbsize(int n)
+static int	ft_nbsize(int n)
 {
 	int	count;
 

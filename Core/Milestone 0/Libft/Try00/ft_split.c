@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_arr_size(char *str, char c)
+static int	ft_arr_size(char const *str, char c)
 {
 	int	i;
 	int	words;
@@ -33,7 +33,7 @@ int	ft_arr_size(char *str, char c)
 	return (words);
 }
 
-void	ft_add_word(char *str, char *arr, int start, int size)
+static void	ft_add_word(char const *str, char *arr, int start, int size)
 {
 	int	i;
 
@@ -46,7 +46,7 @@ void	ft_add_word(char *str, char *arr, int start, int size)
 	arr[i] = '\0';
 }
 
-char	**ft_free_all(char **arr, int count)
+static char	**ft_free_all(char **arr, int count)
 {
 	while (count > 0)
 	{
@@ -57,7 +57,7 @@ char	**ft_free_all(char **arr, int count)
 	return (NULL);
 }
 
-char	**ft_create_array(char *str, char c, char **arr)
+static char	**ft_create_array(char const *str, char c, char **arr)
 {
 	int	i;
 	int	start;
@@ -77,7 +77,7 @@ char	**ft_create_array(char *str, char c, char **arr)
 			arr[arr_counter] = malloc((i - start + 1) * sizeof(char));
 			if (!arr[arr_counter])
 				return (ft_free_all(arr, arr_counter));
-			ft_add_word(str, arr[arr_counter], start, i);
+			ft_add_word(str, arr[arr_counter], start, i - start);
 			arr_counter++;
 		}
 	}
@@ -85,7 +85,7 @@ char	**ft_create_array(char *str, char c, char **arr)
 	return (arr);
 }
 
-char	**ft_split(char *str, char c)
+char	**ft_split(char const *str, char c)
 {
 	char	**arr;
 

@@ -10,19 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_strlen(char const *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
-int	ft_isset(char c, char const *set)
+static int	ft_isset(char c, char const *set)
 {
 	int	i;
 
@@ -36,7 +26,7 @@ int	ft_isset(char c, char const *set)
 	return (0);
 }
 
-int	ft_set_start(char const *s1, char const *set)
+static int	ft_set_start(char const *s1, char const *set)
 {
 	int	start;
 
@@ -46,7 +36,7 @@ int	ft_set_start(char const *s1, char const *set)
 	return (start);
 }
 
-int	ft_set_end(char const *s1, char const *set)
+static int	ft_set_end(char const *s1, char const *set)
 {
 	int	end;
 
@@ -59,16 +49,16 @@ int	ft_set_end(char const *s1, char const *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;
-	int		end;
-	int		size;
-	int		i;
+	size_t	size;
+	size_t	i;
 	char	*str;
 
 	if (!s1 || !set)
 		return (NULL);
 	start = ft_set_start(s1, set);
-	end = ft_set_end(s1, set);
-	size = end - start + 1;
+	if (s1[start] == '\0')
+		return (ft_strdup(""));
+	size = ft_set_end(s1, set) - start + 1;
 	if (size < 0)
 		return (NULL);
 	str = malloc((size + 1) * sizeof(char));

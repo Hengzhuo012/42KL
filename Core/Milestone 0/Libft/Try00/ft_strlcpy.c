@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 13:48:55 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/30 16:03:01 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/31 10:05:45 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	i;
 	size_t	len;
 
+	len = 0;
+	while (src[len])
+		len++;
+	if (size == 0)
+		return (len);
 	i = 0;
-	while (i < size - 1)
+	while (src[i] && i < size - 1)
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = 0;
-	len = 0;
-	while (src[len])
-		len++;
 	return (len);
 }
 

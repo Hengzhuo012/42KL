@@ -6,25 +6,15 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 14:01:59 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/31 00:16:48 by zheng            ###   ########.fr       */
+/*   Updated: 2026/07/31 10:17:56 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-unsigned int	ft_strlen(char const *str)
-{
-	unsigned int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	len_s;
+	size_t			len_s;
 	unsigned int	i;
 	char			*arr;
 
@@ -40,8 +30,10 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		arr[i] = f(i, s[i]);
 		i++;
 	}
+	arr[i] = '\0';
 	return (arr);
 }
+
 /*
 #include <stdio.h>
 

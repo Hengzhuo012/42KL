@@ -26,6 +26,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	last_node = ft_lstlast(*lst);
 	last_node->next = new;
 }
+
 /*
 #include <stdio.h>
 int	main(void)
