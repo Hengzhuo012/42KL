@@ -6,16 +6,23 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:23:53 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/01 22:54:03 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/02 22:52:09 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
+# include "libft/libft.h"
 # include <stdarg.h>
 
-int	ft_printf(const char *, ...);
+int	ft_printf(const char *s, ...);
+int	print_char(const char *s, char c);
+int	print_string(const char *s, char *str);
+int	print_decimal(const char *s, int n);
+int	print_unsigned_decimal(const char *s, unsigned int n);
+int	print_hexa_pointer(const char *s, void *ptr);
+int	print_hexa_number(const char *s, unsigned int n, int upper);
+int	is_conversion(char c);
 
 #endif

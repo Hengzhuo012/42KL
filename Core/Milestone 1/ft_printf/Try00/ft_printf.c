@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:22:46 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/02 01:35:21 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/03 00:44:19 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,18 @@ must use flags first before using '.'
 '.' overwrite '0' on 'diuxX' (technically they are the same)
 '.' works tgt with '-' on 'diuxX' %-7.5d(output "00005  ")
 
+if no number behind '-' or '0', it acts like it is '-0' or '00'
+%.d same as %.0d
+%.0d, d=42 prints '42'
+%.0d, d = 0 prints nothing
+%.0s 100% prints nothing
+
 -----------PART 2-----------
 %#x -> prefix with '0x'
 %#X -> prefix with '0X'
+BOTH below only applied on SIGNED Numbers
 %+d -> output '+' prefix if not negative
+% d -> output ' ' prefix if not negative
 
 */
 
@@ -46,16 +54,50 @@ then pass to which function
 
 #include "ft_printf.h"
 
-static int	is_conversion_percentage(char c, int *i, int *count_output)
+static void	update_index(const char *s, int *i)
 {
-	if (c == '%')
+	while (!is_conversion(s[*i]) && s[*i])
+		(*i)++;
+	if (is_conversion(s[*i]) && s[*i])
+		(*i)++;
+}
+
+static int	determine_and_proceed(const char *s, va_list *args)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && !is_conversion(s[i]))
+		i++;
+	if (s[i] == 'c')
+		return (print_char(s, va_arg(*args, int)));
+	if (s[i] == 's')
+		return (print_string(s, va_arg(*args, char *)));
+	if (s[i] == 'p')
+		return (print_hexa_pointer(s, va_arg(*args, void *)));
+	if (s[i] == 'd' || s[i] == 'i')
+		return (print_decimal(s, va_arg(*args, int)));
+	if (s[i] == 'u')
+		return (print_unsigned_decimal(s, va_arg(*args, unsigned int)));
+	if (s[i] == 'x' || s[i] == 'X')
+		return (print_hexa_number(s, va_arg(*args, unsigned int), s[i] - 'X'));
+	return (0);
+}
+
+static void	check_conversion_and_proceed(const char *s, int *i,
+int *count_output, va_list *args)
+{
+	if (s[*i + 1] == '%')
 	{
-		ft_putchar('%');
+		ft_putchar_fd('%', 1);
 		i++;
 		count_output++;
-		return (1);
 	}
-	return (0);
+	else
+	{
+		count_output += determine_and_proceed(&s[*i + 1], args);
+		update_index(s, i);
+	}
 }
 
 int	ft_printf(const char *s, ...)
@@ -70,13 +112,11 @@ int	ft_printf(const char *s, ...)
 	while (s[i])
 	{
 		if (s[i] == '%')
-		{
-			if (!is_conversion_percentage(s[i + 1], &i, &count_output))
-				count_output += check_and_proceed(s[i + 1], &args, &i);
-		}
+			check_conversion_and_proceed(s, &i, &count_output, &args);
 		else
 		{
-			ft_putchar(s[i++]);
+			ft_putchar_fd(s[i], 1);
+			i++;
 			count_output++;
 		}
 	}
