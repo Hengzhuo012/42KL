@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:23:53 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/02 22:52:09 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/03 20:06:14 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-int	ft_printf(const char *s, ...);
-int	print_char(const char *s, char c);
-int	print_string(const char *s, char *str);
-int	print_decimal(const char *s, int n);
-int	print_unsigned_decimal(const char *s, unsigned int n);
-int	print_hexa_pointer(const char *s, void *ptr);
-int	print_hexa_number(const char *s, unsigned int n, int upper);
-int	is_conversion(char c);
+int		ft_printf(const char *s, ...);
+
+int		print_char(const char *s, char c);
+int		print_string(const char *s, char *str);
+int		print_decimal(const char *s, int n);
+int		print_unsigned_decimal(const char *s, unsigned int n);
+int		print_hexa_pointer(const char *s, void *ptr);
+int		print_hexa_number(const char *s, unsigned int n, int upper);
+
+int		is_conversion(char c);
+
+void	skip_precision(const char *s, int *i);
+void	get_width_and_update_index(const char *s, int *i, int *len);
+void	print_padding(char c, int len);
 
 #endif
