@@ -9,8 +9,8 @@ int	main(void)
 %#-0 +20.5i\n%#-0 +20.5u\n%#-0 +20.5x\n%#-0 +20.5X\n%%\n";
 	printf(test, 'c', "test", (void *)test, 42, 42, 42, 42, 42);
 	printf("New Line\n");
-	test = "%020p";
-	n = printf(test, (void *)test);
+	test = "%.0d";
+	n = printf(test, 0);
 	printf("\n%d", n);
 	return (0);
 }

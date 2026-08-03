@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:52:30 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/03 20:07:05 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/03 22:57:27 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,18 @@ void	print_padding(char c, int len)
 		ft_putchar_fd(c, 1);
 		i++;
 	}
+}
+
+int	get_precision(const char *s, int *i)
+{
+	int	precision;
+
+	precision = 0;
+	(*i)++;
+	while (s[*i] && ft_isdigit(s[*i]))
+	{
+		precision = (precision * 10) + (s[*i] - '0');
+		(*i)++;
+	}
+	return (precision);
 }

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:12:40 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/03 21:01:00 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/03 23:19:11 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	print_decimal_in_hexa(void *ptr, int len_hexa_ptr)
 		ft_putchar_fd(buffer[i++], 1);
 }
 
-static void	check_flags_hexa_pointer(const char *s, int *mode, int *len)
+static void	check_flags_hexa_pointer(const char *s, int *mode, int *width)
 {
 	int	i;
 
@@ -96,14 +96,15 @@ static void	check_flags_hexa_pointer(const char *s, int *mode, int *len)
 				*mode = 2;
 			else if (*mode != 1)
 				*mode = 3;
-			get_width_and_update_index(s, &i, len);
+			get_width_and_update_index(s, &i, width);
 		}
 		else
 			i++;
 	}
 }
 
-static	void print_hexa_pointer_mode(void *ptr, int mode, int len, int total_len)
+static void	print_hexa_pointer_mode(void *ptr, int mode,
+int width, int total_len)
 {
 	int	len_hexa_ptr;
 
@@ -111,13 +112,13 @@ static	void print_hexa_pointer_mode(void *ptr, int mode, int len, int total_len)
 	if (mode == 1)
 	{
 		print_decimal_in_hexa(ptr, len_hexa_ptr);
-		if (len > total_len)
-			print_padding(' ', len - total_len);
+		if (width > total_len)
+			print_padding(' ', width - total_len);
 	}
 	else if (mode == 2 || mode == 3)
 	{
-		if (len > total_len)
-			print_padding(' ', len - total_len);
+		if (width > total_len)
+			print_padding(' ', width - total_len);
 		print_decimal_in_hexa(ptr, len_hexa_ptr);
 	}
 	else
@@ -125,10 +126,11 @@ static	void print_hexa_pointer_mode(void *ptr, int mode, int len, int total_len)
 }
 
 // if 0x00000asoi4214sda is required, 
-// static void	print_hexa_pointer_mode(void *ptr, int mode, int len, int total_len)
+// static void	print_hexa_pointer_mode(void *ptr, int mode,
+// int len, int total_len)
 // {
 // 	int	len_hexa_ptr;
-//
+
 // 	len_hexa_ptr = count_hexa_length(ptr);
 // 	/* mode 1: Left-aligned with spaces */
 // 	if (mode == 1)
@@ -163,40 +165,39 @@ static	void print_hexa_pointer_mode(void *ptr, int mode, int len, int total_len)
 // 		print_decimal_in_hexa(ptr, len_hexa_ptr);
 // }
 
-
 int	print_hexa_pointer(const char *s, void *ptr)
 {
-	int		len;
+	int		width;
 	int		mode;
 	int		total_len;
 
-	len = 0;
+	width = 0;
 	mode = 0;
-	check_flags_hexa_pointer(s, &mode, &len);
+	check_flags_hexa_pointer(s, &mode, &width);
 	if (!ptr)
 		total_len = 5;
 	else
 		total_len = count_hexa_length(ptr) + 2;
 	print_hexa_pointer_mode(ptr, mode, len, total_len);
-	if (len > total_len)
-		return (len);
+	if (width > total_len)
+		return (width);
 	return (total_len);
 }
 
-#include <stdio.h>
-int	main(void)
-{
-	int	i = 10;
-	int	*ptr = &i;
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	i = 10;
+// 	int	*ptr = &i;
 
-	write(1, "Without flags:", ft_strlen("Without flags:"));
-	print_hexa_pointer("p", ptr);
-	ft_putchar_fd('\n', 1);
+// 	write(1, "Without flags:", ft_strlen("Without flags:"));
+// 	print_hexa_pointer("p", ptr);
+// 	ft_putchar_fd('\n', 1);
 
-	print_hexa_pointer("20p", ptr);
-	ft_putchar_fd('\n', 1);
-	print_hexa_pointer("-20p", ptr);
-	ft_putchar_fd('\n', 1);
-	print_hexa_pointer("020p", ptr);
-	ft_putchar_fd('\n', 1);
-}
+// 	print_hexa_pointer("20p", ptr);
+// 	ft_putchar_fd('\n', 1);
+// 	print_hexa_pointer("-20p", ptr);
+// 	ft_putchar_fd('\n', 1);
+// 	print_hexa_pointer("020p", ptr);
+// 	ft_putchar_fd('\n', 1);
+// }
