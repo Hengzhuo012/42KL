@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_helper.c                                     :+:      :+:    :+:   */
+/*   print_helper_flags.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:52:30 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/03 22:57:27 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/04 12:03:34 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ int	get_precision(const char *s, int *i)
 		(*i)++;
 	}
 	return (precision);
+}
+
+void determine_prefix_and_update_index(const char *s, int *i, int *prefix)
+{
+	if (s[*i] == '+')
+		*prefix = '+';
+	else if (s[*i] == ' ' && (*prefix) != '+')
+		*prefix = ' ';
+	(*i)++;
 }
