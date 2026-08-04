@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 01:08:33 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 02:04:52 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 02:13:56 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ int print_len, unsigned int n)
 	if (vars->mode != 1 && vars->mode != 3 && vars->width > print_len)
 		print_padding(' ', vars->width - print_len);
 	if (vars->prefix && vars->is_upper)
-		ft_putstr_fd("0X", 1)
+		ft_putstr_fd("0X", 1);
 	else if (vars->prefix)
-		ft_putstr_fd("0x", 1)
+		ft_putstr_fd("0x", 1);
 	if (vars->mode == 3 && vars->width > print_len)
 		print_padding('0', vars->width - print_len);
 	print_padding('0', vars->precision - hexa_num_len);

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 22:14:30 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 02:10:08 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 02:15:20 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ if n < 0
 */
 #include "ft_printf.h"
 
-static void determine_prefix_and_update_index(const char *s, int *i,
+static void	determine_prefix_and_update_index(const char *s, int *i,
 int *prefix)
 {
 	if (s[*i] == '+')
@@ -103,7 +103,7 @@ int print_len, unsigned int num)
 		print_padding(' ', vars->width - print_len);
 }
 
-static unsigned int	convert_int_to_unsigned_int(int	n, t_vars *vars)
+static unsigned int	convert_int_to_unsigned_int(int n, t_vars *vars)
 {
 	if (n < 0)
 	{
