@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:23:53 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/04 12:03:11 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 01:49:56 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_vars
 	int	width;
 	int	precision;
 	int	prefix;
+	int	is_upper;
 }	t_vars;
 
 int		ft_printf(const char *s, ...);
@@ -40,7 +41,6 @@ void	get_width_and_update_index(const char *s, int *i, int *len);
 void	print_padding(char c, int len);
 int		get_precision(const char *s, int *i);
 void	initialise_t_vars(t_vars *vars);
-void determine_prefix_and_update_index(const char *s, int *i, int *prefix);
 
 void	put_unsignednbr_fd(unsigned int n, int fd);
 int		digits_count(unsigned int n);

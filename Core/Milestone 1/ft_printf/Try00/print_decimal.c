@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 22:14:30 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/04 12:30:17 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 02:10:08 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 
 (mode 1)
 %-(width)d -> padding with ending ' ', left-aligned
-				only if width > widthgth else ignore
+				only if width > length else ignore
 				if %-5d, d = -42, output = "-42  "
 
 (mode 2)
 %(width)d -> padding with leading ' ', right-aligned
-				only if width > widthgth else ignore
+				only if width > length else ignore
 				if %5d, d = -42, output = "  -42"
 
 (mode 3)
 %0(width)d -> padding with leading '0', right-aligned
-				only if width > widthgth else ignore
+				only if width > length else ignore
 				if %05d, d = -42, output = "-0042"
 
 (precision)
@@ -48,22 +48,14 @@ if n < 0
 */
 #include "ft_printf.h"
 
-static void	set_mode_get_width_update_index(const char *s,
-t_vars *vars, int *i)
+static void determine_prefix_and_update_index(const char *s, int *i,
+int *prefix)
 {
-	if (s[*i] == '-')
-	{
-		vars->mode = 1;
-		(*i)++;
-	}
-	else
-	{
-		if (vars->mode == 0 && s[*i] == '0')
-			vars->mode = 3;
-		else if (vars->mode == 0)
-			vars->mode = 2;
-		get_width_and_update_index(s, i, &vars->width);
-	}
+	if (s[*i] == '+')
+		*prefix = '+';
+	else if (s[*i] == ' ' && (*prefix) != '+')
+		*prefix = ' ';
+	(*i)++;
 }
 
 static void	check_flags_decimal(const char *s, t_vars *vars)
@@ -75,8 +67,19 @@ static void	check_flags_decimal(const char *s, t_vars *vars)
 	{
 		if (s[i] == '.')
 			vars->precision = get_precision(s, &i);
-		else if (s[i] == '-' || ft_isdigit(s[i]))
-			set_mode_get_width_update_index(s, vars, &i);
+		else if (s[i] == '-')
+		{
+			vars->mode = 1;
+			i++;
+		}
+		else if (ft_isdigit(s[i]))
+		{
+			if (vars->mode == 0 && s[i] == '0')
+				vars->mode = 3;
+			else if (vars->mode == 0)
+				vars->mode = 2;
+			get_width_and_update_index(s, &i, &vars->width);
+		}
 		else if (s[i] == '+' || s[i] == ' ')
 			determine_prefix_and_update_index(s, &i, &vars->prefix);
 		else
@@ -100,6 +103,16 @@ int print_len, unsigned int num)
 		print_padding(' ', vars->width - print_len);
 }
 
+static unsigned int	convert_int_to_unsigned_int(int	n, t_vars *vars)
+{
+	if (n < 0)
+	{
+		vars->prefix = '-';
+		return ((unsigned int)(-(long)n));
+	}
+	return ((unsigned int)n);
+}
+
 int	print_decimal(const char *s, int n)
 {
 	t_vars			vars;
@@ -109,19 +122,19 @@ int	print_decimal(const char *s, int n)
 
 	initialise_t_vars(&vars);
 	check_flags_decimal(s, &vars);
-	num = (unsigned int)n;
-	if (n < 0)
+	num = convert_int_to_unsigned_int(n, &vars);
+	digit_len = digits_count(num);
+	if (n == 0 && vars.precision == 0)
+		digit_len = 0;
+	if (vars.precision >= 0)
 	{
-		vars.prefix = '-';
-		num = (unsigned int)(-(long)n);
+		if (vars.precision < digit_len)
+			vars.precision = digit_len;
+		if (vars.mode != 1)
+			vars.mode = 2;
 	}
-	digit_len = digits_count(num) * !(n == 0 && vars.precision == 0);
-	if (vars.precision >= 0 && vars.precision < digit_len)
+	else
 		vars.precision = digit_len;
-	else if (vars.precision < 0)
-		vars.precision = digit_len;
-	if (vars.mode == 3 && vars.precision > digit_len)
-		vars.mode = 2;
 	print_len = vars.precision + (vars.prefix != 0);
 	render_decimal_output(&vars, digit_len, print_len, num);
 	if (vars.width > print_len)

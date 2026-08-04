@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:22:46 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/03 00:44:19 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 01:44:39 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	determine_and_proceed(const char *s, va_list *args)
 	if (s[i] == 'u')
 		return (print_unsigned_decimal(s, va_arg(*args, unsigned int)));
 	if (s[i] == 'x' || s[i] == 'X')
-		return (print_hexa_number(s, va_arg(*args, unsigned int), s[i] - 'X'));
+		return (print_hexa_number(s, va_arg(*args, unsigned int), (s[i] == 'X')));
 	return (0);
 }
 

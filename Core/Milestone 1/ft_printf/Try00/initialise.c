@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 12:03:25 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/04 12:28:20 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 01:43:39 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	initialise_t_vars(t_vars *vars)
 	vars->width = 0;
 	vars->precision = -1;
 	vars->prefix = 0;
+	vars->is_upper = -1;
 }
