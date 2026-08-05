@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/05 21:24:34 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 21:58:52 by zheng            ###   ########.fr       */
+/*   Created: 2026/08/02 17:13:49 by zheng             #+#    #+#             */
+/*   Updated: 2026/08/05 21:18:45 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf_bonus.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
+int	is_conversion(char c)
+{
+	char	*str;
+	int		i;
 
-int	ft_printf(const char *s, ...);
-
-int	print_char(int c);
-int	print_string(char *str);
-int	print_hexa_pointer(void *ptr);
-int	print_decimal(int n);
-int	print_unsigned_decimal(unsigned int n);
-int	print_hexa_number(unsigned int n, int is_upper);
-
-#endif
+	str = "cspdiuxX";
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}

@@ -1,9 +1,12 @@
 NAME = libftprintf.a
-SRC = ft_printf.c check.c initialise.c print_helper_numbers.c \
-	print_helper_flags.c \
-	print_char.c print_decimal.c print_hexa_number.c print_hexa_pointer.c \
-	print_string.c print_unsigned_decimal.c
+SRC = ft_printf.c print_conversions.c print_conversions_2.c print_conversions_3.c
 OBJ = $(SRC:.c=.o)
+
+BONUS_SRC = ft_printf_bonus.c check_bonus.c initialise_bonus.c \
+	print_helper_numbers_bonus.c print_helper_flags_bonus.c \
+	print_char_bonus.c print_decimal_bonus.c print_hexa_number_bonus.c \
+	print_hexa_pointer_bonus.c print_string_bonus.c print_unsigned_decimal_bonus.c
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -21,6 +24,10 @@ $(NAME): $(OBJ) $(LIBFT)
 	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJ)
 
+bonus: $(BONUS_OBJ) $(LIBFT)
+	cp $(LIBFT) $(NAME)
+	ar rcs $(NAME) $(BONUS_OBJ)
+
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
@@ -28,7 +35,7 @@ $(LIBFT):
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(BONUS_OBJ)
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean
@@ -37,4 +44,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/02 17:13:49 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/02 22:59:33 by zheng            ###   ########.fr       */
+/*   Created: 2026/08/05 22:28:10 by zheng             #+#    #+#             */
+/*   Updated: 2026/08/06 00:10:09 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int	is_conversion(char c)
+int	main(void)
 {
-	char	*str;
-	int		i;
+	int	n;
 
-	str = "cspdiuxX";
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
+	n = 10;
+	printf("value: %-5.0d", n);
+	ft_printf("value: %-5.0d", n);
 }

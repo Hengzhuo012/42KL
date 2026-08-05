@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_decimal.c                                    :+:      :+:    :+:   */
+/*   print_decimal_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 22:14:30 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 02:15:20 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 21:19:10 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ if n < 0
 (prefix ' ')
 % d -> print ' ' prefix if number not negative
 */
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 static void	determine_prefix_and_update_index(const char *s, int *i,
 int *prefix)

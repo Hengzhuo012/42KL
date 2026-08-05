@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   print_helper_numbers_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/05 21:24:34 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 21:58:52 by zheng            ###   ########.fr       */
+/*   Created: 2026/08/04 11:22:09 by zheng             #+#    #+#             */
+/*   Updated: 2026/08/05 21:19:15 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf_bonus.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
+void	put_unsignednbr_fd(unsigned int n, int fd)
+{
+	char	c;
 
-int	ft_printf(const char *s, ...);
+	if (n > 9)
+	{
+		put_unsignednbr_fd(n / 10, fd);
+		put_unsignednbr_fd(n % 10, fd);
+	}
+	else
+	{
+		c = n + '0';
+		write(fd, &c, 1);
+	}
+}
 
-int	print_char(int c);
-int	print_string(char *str);
-int	print_hexa_pointer(void *ptr);
-int	print_decimal(int n);
-int	print_unsigned_decimal(unsigned int n);
-int	print_hexa_number(unsigned int n, int is_upper);
+int	digits_count(unsigned int n)
+{
+	int	count;
 
-#endif
+	if (n == 0)
+		return (1);
+	count = 0;
+	while (n > 0)
+	{
+		count++;
+		n /= 10;
+	}
+	return (count);
+}

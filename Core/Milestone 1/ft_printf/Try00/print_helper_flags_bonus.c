@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_helper_flags.c                               :+:      :+:    :+:   */
+/*   print_helper_flags_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:52:30 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 01:49:42 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 21:19:13 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	skip_precision(const char *s, int *i)
 {
