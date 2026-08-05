@@ -1,5 +1,8 @@
 NAME = libftprintf.a
-SRC = ft_printf.c
+SRC = ft_printf.c check.c initialise.c print_helper_numbers.c \
+	print_helper_flags.c \
+	print_char.c print_decimal.c print_hexa_number.c print_hexa_pointer.c \
+	print_string.c print_unsigned_decimal.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

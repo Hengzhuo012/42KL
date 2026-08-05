@@ -6,14 +6,13 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:11:32 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/03 23:16:05 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 10:48:29 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	check_flags_string(const char *s, int *mode,
-int *width, int *precision)
+static void	check_flags_string(const char *s, t_vars *vars)
 {
 	int	i;
 
@@ -21,17 +20,17 @@ int *width, int *precision)
 	while (s[i] && s[i] != 's')
 	{
 		if (s[i] == '.')
-			(*precision) = get_precision(s, &i);
+			(vars->precision) = get_precision(s, &i);
 		else if (s[i] == '-')
 		{
-			*mode = 1;
+			vars->mode = 1;
 			i++;
 		}
 		else if (ft_isdigit(s[i]))
 		{
-			if (*mode != 1)
-				*mode = 2;
-			get_width_and_update_index(s, &i, width);
+			if (vars->mode != 1)
+				vars->mode = 2;
+			get_width_and_update_index(s, &i, &vars->width);
 		}
 		else
 			i++;
@@ -52,29 +51,26 @@ static void	ft_putstrn_fd(char *s, int fd, int n)
 
 int	print_string(const char *s, char *str)
 {
-	int	width;
-	int	mode;
-	int	precision;
-	int	str_len;
+	t_vars	vars;
+	int		str_len;
 
 	if (!str)
 		str = "(null)";
-	width = 0;
-	mode = 0;
+	initialise_t_vars(&vars);
 	str_len = ft_strlen(str);
-	precision = str_len;
-	check_flags_string(s, &mode, &width, &precision);
-	if (precision > str_len)
-		precision = str_len;
-	if (mode == 1)
-		ft_putstrn_fd(str, 1, precision);
-	if (mode != 0 && width > precision)
-		print_padding(' ', width - precision);
-	if (mode == 2 || mode == 0)
-		ft_putstrn_fd(str, 1, precision);
-	if (width > precision)
-		return (width);
-	return (precision);
+	vars.precision = str_len;
+	check_flags_string(s, &vars);
+	if (vars.precision > str_len)
+		vars.precision = str_len;
+	if (vars.mode == 1)
+		ft_putstrn_fd(str, 1, vars.precision);
+	if (vars.mode != 0 && vars.width > vars.precision)
+		print_padding(' ', vars.width - vars.precision);
+	if (vars.mode == 2 || vars.mode == 0)
+		ft_putstrn_fd(str, 1, vars.precision);
+	if (vars.width > vars.precision)
+		return (vars.width);
+	return (vars.precision);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 15:12:40 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/03 23:19:11 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 14:06:53 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@
 				only if width > length else ignore
 
 (mode 3)
-%0(width)p -> padding with leading '0' after '0x', right-aligned
-				only if width > length else ignore
-				eg: 0x0000005c3bf190907a
-OR
--> same to mode 2
+%0(width)p -> error
 */
 
 #include "ft_printf.h"
@@ -76,7 +72,7 @@ static void	print_decimal_in_hexa(void *ptr, int len_hexa_ptr)
 		ft_putchar_fd(buffer[i++], 1);
 }
 
-static void	check_flags_hexa_pointer(const char *s, int *mode, int *width)
+static void	check_flags_hexa_pointer(const char *s, t_vars *vars)
 {
 	int	i;
 
@@ -87,100 +83,59 @@ static void	check_flags_hexa_pointer(const char *s, int *mode, int *width)
 			skip_precision(s, &i);
 		else if (s[i] == '-')
 		{
-			*mode = 1;
+			vars->mode = 1;
 			i++;
 		}
 		else if (ft_isdigit(s[i]))
 		{
-			if (*mode != 1 && s[i] != '0')
-				*mode = 2;
-			else if (*mode != 1)
-				*mode = 3;
-			get_width_and_update_index(s, &i, width);
+			if (vars->mode != 1 && s[i] != '0')
+				vars->mode = 2;
+			else if (vars->mode != 1)
+				vars->mode = 3;
+			get_width_and_update_index(s, &i, &vars->width);
 		}
 		else
 			i++;
 	}
 }
 
-static void	print_hexa_pointer_mode(void *ptr, int mode,
-int width, int total_len)
+static void	print_hexa_pointer_mode(void *ptr, t_vars *vars, int total_len)
 {
 	int	len_hexa_ptr;
 
 	len_hexa_ptr = count_hexa_length(ptr);
-	if (mode == 1)
+	if (vars->mode == 1)
 	{
 		print_decimal_in_hexa(ptr, len_hexa_ptr);
-		if (width > total_len)
-			print_padding(' ', width - total_len);
+		if (vars->width > total_len)
+			print_padding(' ', vars->width - total_len);
 	}
-	else if (mode == 2 || mode == 3)
+	else if (vars->mode == 2 || vars->mode == 3)
 	{
-		if (width > total_len)
-			print_padding(' ', width - total_len);
+		if (vars->width > total_len)
+			print_padding(' ', vars->width - total_len);
 		print_decimal_in_hexa(ptr, len_hexa_ptr);
 	}
 	else
 		print_decimal_in_hexa(ptr, len_hexa_ptr);
 }
 
-// if 0x00000asoi4214sda is required, 
-// static void	print_hexa_pointer_mode(void *ptr, int mode,
-// int len, int total_len)
-// {
-// 	int	len_hexa_ptr;
-
-// 	len_hexa_ptr = count_hexa_length(ptr);
-// 	/* mode 1: Left-aligned with spaces */
-// 	if (mode == 1)
-// 	{
-// 		print_decimal_in_hexa(ptr, len_hexa_ptr);
-// 		if (len > total_len)
-// 			print_padding(' ', len - total_len);
-// 	}
-// 	/* mode 2: Right-aligned with spaces */
-// 	else if (mode == 2)
-// 	{
-// 		if (len > total_len)
-// 			print_padding(' ', len - total_len);
-// 		print_decimal_in_hexa(ptr, len_hexa_ptr);
-// 	}
-// 	/* mode 3: Zero-padded (%020p -> 0x0000005d...) */
-// 	else if (mode == 3)
-// 	{
-// 		if (!ptr)
-// 		{
-// 			if (len > total_len)
-// 				print_padding(' ', len - total_len);
-// 			ft_putstr_fd("(nil)", 1);
-// 			return ;
-// 		}
-// 		ft_putstr_fd("0x", 1);
-// 		if (len > total_len)
-// 			print_padding('0', len - total_len);
-// 		print_hex_digits_only(ptr, len_hexa_ptr);
-// 	}
-// 	else
-// 		print_decimal_in_hexa(ptr, len_hexa_ptr);
-// }
-
 int	print_hexa_pointer(const char *s, void *ptr)
 {
-	int		width;
-	int		mode;
+	t_vars	vars;
 	int		total_len;
 
-	width = 0;
-	mode = 0;
-	check_flags_hexa_pointer(s, &mode, &width);
+	initialise_t_vars(&vars);
+	check_flags_hexa_pointer(s, &vars);
 	if (!ptr)
 		total_len = 5;
 	else
 		total_len = count_hexa_length(ptr) + 2;
-	print_hexa_pointer_mode(ptr, mode, len, total_len);
-	if (width > total_len)
-		return (width);
+	if (vars.mode == 3)
+		return (0);
+	print_hexa_pointer_mode(ptr, &vars, total_len);
+	if (vars.width > total_len)
+		return (vars.width);
 	return (total_len);
 }
 

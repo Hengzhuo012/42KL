@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 01:08:33 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 02:13:56 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 13:57:03 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int is_upper)
 	int			i;
 
 	if (is_upper)
-		hexa = "0123456789abcdef";
-	else
 		hexa = "0123456789ABCDEF";
+	else
+		hexa = "0123456789abcdef";
 	i = len_hexa_ptr - 1;
 	while (i >= 0)
 	{
@@ -113,7 +113,7 @@ int print_len, unsigned int n)
 		print_padding('0', vars->width - print_len);
 	print_padding('0', vars->precision - hexa_num_len);
 	if (!(n == 0 && vars->precision == 0))
-		print_unsigned_decimal_in_hexa(n, hexa_num_len);
+		print_unsigned_decimal_in_hexa(n, hexa_num_len, vars->is_upper);
 	if (vars->mode == 1 && vars->width > print_len)
 		print_padding(' ', vars->width - print_len);
 }
@@ -140,7 +140,7 @@ int	print_hexa_number(const char *s, unsigned int n, int is_upper)
 	else
 		vars.precision = hexa_num_len;
 	print_len = vars.precision + (vars.prefix != 0) * 2;
-	render_hexa_number_output(vars, hexa_num_len, print_len, n);
+	render_hexa_number_output(&vars, hexa_num_len, print_len, n);
 	if (vars.width > print_len)
 		return (vars.width);
 	return (print_len);

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:22:46 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 02:16:39 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 13:56:36 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int *count_output, va_list *args)
 	if (s[*i + 1] == '%')
 	{
 		ft_putchar_fd('%', 1);
-		i++;
-		count_output++;
+		(*i) += 2;
+		(*count_output)++;
 	}
 	else
 	{
-		count_output += determine_and_proceed(&s[*i + 1], args);
+		(*count_output) += determine_and_proceed(&s[*i + 1], args);
 		update_index(s, i);
 	}
 }

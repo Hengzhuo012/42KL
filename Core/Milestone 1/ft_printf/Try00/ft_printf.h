@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:23:53 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 01:49:56 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/05 13:46:40 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_vars
 
 int		ft_printf(const char *s, ...);
 
-int		print_char(const char *s, char c);
+int		print_char(const char *s, int c);
 int		print_string(const char *s, char *str);
 int		print_decimal(const char *s, int n);
 int		print_unsigned_decimal(const char *s, unsigned int n);
@@ -40,6 +40,7 @@ void	skip_precision(const char *s, int *i);
 void	get_width_and_update_index(const char *s, int *i, int *len);
 void	print_padding(char c, int len);
 int		get_precision(const char *s, int *i);
+
 void	initialise_t_vars(t_vars *vars);
 
 void	put_unsignednbr_fd(unsigned int n, int fd);
