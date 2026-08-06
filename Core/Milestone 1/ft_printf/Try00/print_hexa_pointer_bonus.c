@@ -131,8 +131,6 @@ int	print_hexa_pointer(const char *s, void *ptr)
 		total_len = 5;
 	else
 		total_len = count_hexa_length(ptr) + 2;
-	if (vars.mode == 3)
-		return (0);
 	print_hexa_pointer_mode(ptr, &vars, total_len);
 	if (vars.width > total_len)
 		return (vars.width);

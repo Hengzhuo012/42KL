@@ -49,7 +49,7 @@ int	print_char(const char *s, int c)
 	check_flags_char(s, &vars);
 	if (vars.mode == 1)
 		ft_putchar_fd(c, 1);
-	if (vars.mode != 0)
+	if (vars.mode != 0 && vars.width > 1)
 		print_padding(' ', vars.width - 1);
 	if (vars.mode == 2 || vars.mode == 0)
 		ft_putchar_fd(c, 1);

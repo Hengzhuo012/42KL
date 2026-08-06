@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 23:20:21 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 21:19:29 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/06 10:10:34 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,20 @@ static void	check_flags_unsigned_decimal(const char *s, t_vars *vars)
 	}
 }
 
+static void	render_unsigned_decimal_output(t_vars *vars,
+int digit_len, unsigned int n)
+{
+	if (vars->mode != 1 && vars->mode != 3 && vars->width > vars->precision)
+		print_padding(' ', vars->width - vars->precision);
+	if (vars->mode == 3 && vars->width > vars->precision)
+		print_padding('0', vars->width - vars->precision);
+	print_padding('0', vars->precision - digit_len);
+	if (!(n == 0 && vars->precision == 0))
+		put_unsignednbr_fd(n, 1);
+	if (vars->mode == 1 && vars->width > vars->precision)
+		print_padding(' ', vars->width - vars->precision);
+}
+
 int	print_unsigned_decimal(const char *s, unsigned int n)
 {
 	t_vars			vars;
@@ -72,19 +86,16 @@ int	print_unsigned_decimal(const char *s, unsigned int n)
 	digit_len = digits_count(n);
 	if (n == 0 && vars.precision == 0)
 		digit_len = 0;
-	if (vars.precision >= 0 && vars.precision < digit_len)
+	if (vars.precision >= 0)
+	{
+		if (vars.precision < digit_len)
+			vars.precision = digit_len;
+		if (vars.mode != 1)
+			vars.mode = 2;
+	}
+	else
 		vars.precision = digit_len;
-	else if (vars.precision < 0)
-		vars.precision = digit_len;
-	if (vars.mode != 1 && vars.mode != 3 && vars.width > vars.precision)
-		print_padding(' ', vars.width - vars.precision);
-	if (vars.mode == 3 && vars.width > vars.precision)
-		print_padding('0', vars.width - vars.precision);
-	print_padding('0', vars.precision - digit_len);
-	if (!(n == 0 && vars.precision == 0))
-		put_unsignednbr_fd(n, 1);
-	if (vars.mode == 1 && vars.width > vars.precision)
-		print_padding(' ', vars.width - vars.precision);
+	render_unsigned_decimal_output(&vars, digit_len, n);
 	if (vars.width > vars.precision)
 		return (vars.width);
 	return (vars.precision);
