@@ -37,8 +37,8 @@ int is_upper)
 
 int	print_hexa_number(unsigned int n, int is_upper)
 {
-	int	hexa_num_len;
-	int	temp;
+	int				hexa_num_len;
+	unsigned int	temp;
 
 	hexa_num_len = 1;
 	temp = n;
