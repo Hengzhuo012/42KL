@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 13:17:28 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/09 16:28:15 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/10 10:17:06 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 # include <unistd.h>
 # include <stddef.h>
 
-typedef struct s_len_and_string
+typedef struct s_line
 {
 	size_t	len;
+	size_t	start;
+	size_t	end;
 	char	*content;
-}	t_len_and_string;
+}	t_line;
 
 char	*get_next_line(int fd);
 
