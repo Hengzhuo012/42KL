@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 13:17:23 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/12 00:00:16 by zheng            ###   ########.fr       */
+/*   Created: 2026/08/12 00:00:41 by zheng             #+#    #+#             */
+/*   Updated: 2026/08/12 00:17:26 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static size_t	get_len(char *content, size_t start)
 {
@@ -104,27 +104,28 @@ static int	check_buffer(int fd, t_line *buffer, t_line *line)
 
 char	*get_next_line(int fd)
 {
-	static t_line	buffer = {0, 0, 0, NULL};
+	static t_line	buffer[MAX_FD];
 	t_line			line;
 	int				status;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
 	line.content = NULL;
 	line.len = 0;
 	while (!line.content
 		|| (line.len > 0 && line.content[line.len - 1] != '\n'))
 	{
-		status = check_buffer(fd, &buffer, &line);
+		status = check_buffer(fd, &buffer[fd], &line);
 		if (status == -1)
 			return (NULL);
 		if (status == 0)
 			break ;
-		buffer.end = get_len(buffer.content, buffer.start);
-		add_buffer_to_line(buffer.content, buffer.start, buffer.end, &line);
+		buffer[fd].end = get_len(buffer[fd].content, buffer[fd].start);
+		add_buffer_to_line(buffer[fd].content,
+			buffer[fd].start, buffer[fd].end, &line);
 		if (!line.content)
 			return (NULL);
-		buffer.start = buffer.end;
+		buffer[fd].start = buffer[fd].end;
 	}
 	return (line.content);
 }
