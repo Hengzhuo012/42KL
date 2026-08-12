@@ -17,8 +17,12 @@
 #  define BUFFER_SIZE 1024
 # endif
 
+//1024 -> soft limit
+//10240 -> macOS limit
+//1048576 -> hard limit
+
 # ifndef MAX_FD
-#  define MAX_FD 4096
+#  define MAX_FD 10240
 # endif
 
 # include <stdlib.h>
