@@ -1,0 +1,88 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/28 12:44:15 by zheng             #+#    #+#             */
+/*   Updated: 2026/08/02 22:49:19 by zheng            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	ft_isset(char c, char const *set)
+{
+	int	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	ft_set_start(char const *s1, char const *set)
+{
+	int	start;
+
+	start = 0;
+	while (ft_isset(s1[start], set))
+		start++;
+	return (start);
+}
+
+static int	ft_set_end(char const *s1, char const *set)
+{
+	int	end;
+
+	end = ft_strlen(s1) - 1;
+	while (ft_isset(s1[end], set))
+		end--;
+	return (end);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		start;
+	size_t	size;
+	size_t	i;
+	char	*str;
+
+	if (!s1 || !set)
+		return (NULL);
+	start = ft_set_start(s1, set);
+	if (s1[start] == '\0')
+		return (ft_strdup(""));
+	size = ft_set_end(s1, set) - start + 1;
+	str = malloc((size + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		str[i] = s1[start + i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+/*
+#include <stdio.h>
+int	main(void)
+{
+	char	*str;
+	char	*set;
+	char	*strtrim;
+
+	str = "&&&#*##&Hello&***#&";
+	set = "&#*";
+	strtrim = ft_strtrim(str, set);
+	printf("%s\n", strtrim);
+	free(strtrim);
+}
+*/

@@ -1,0 +1,113 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_string_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/03 13:11:32 by zheng             #+#    #+#             */
+/*   Updated: 2026/08/05 21:19:26 by zheng            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf_bonus.h"
+
+static void	check_flags_string(const char *s, t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != 's')
+	{
+		if (s[i] == '.')
+			(vars->precision) = get_precision(s, &i);
+		else if (s[i] == '-')
+		{
+			vars->mode = 1;
+			i++;
+		}
+		else if (ft_isdigit(s[i]))
+		{
+			if (vars->mode != 1)
+				vars->mode = 2;
+			get_width_and_update_index(s, &i, &vars->width);
+		}
+		else
+			i++;
+	}
+}
+
+static void	ft_putstrn_fd(char *s, int fd, int n)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && i < n)
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
+
+int	print_string(const char *s, char *str)
+{
+	t_vars	vars;
+	int		str_len;
+
+	if (!str)
+		str = "(null)";
+	initialise_t_vars(&vars);
+	str_len = ft_strlen(str);
+	vars.precision = str_len;
+	check_flags_string(s, &vars);
+	if (vars.precision > str_len)
+		vars.precision = str_len;
+	if (vars.mode == 1)
+		ft_putstrn_fd(str, 1, vars.precision);
+	if (vars.mode != 0 && vars.width > vars.precision)
+		print_padding(' ', vars.width - vars.precision);
+	if (vars.mode == 2 || vars.mode == 0)
+		ft_putstrn_fd(str, 1, vars.precision);
+	if (vars.width > vars.precision)
+		return (vars.width);
+	return (vars.precision);
+}
+
+/*
+ccc print_string.c print_helper.c ./libft/ft_isdigit.c
+./libft/ft_putchar_fd.c ./libft/ft_strlen.c
+*/
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	write(1, "Without flags:", ft_strlen("Without flags:"));
+// 	print_string("%s", "Hello");
+// 	write(1, "\n", 1);
+
+// 	print_string("%8s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%3s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%-8s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%-3s", "Hello");
+// 	write(1, "\n", 1);
+
+// 	print_string("%8.5s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%3.5s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%-8.5s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%-3.5s", "Hello");
+// 	write(1, "\n", 1);
+
+// 	print_string("%8.2s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%3.2s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%-8.2s", "Hello");
+// 	write(1, "\n", 1);
+// 	print_string("%-3.2s", "Hello");
+// 	write(1, "\n", 1);
+// }
