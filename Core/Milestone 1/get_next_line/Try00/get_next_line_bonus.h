@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 00:01:09 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/12 00:18:07 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/14 23:40:53 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 //1048576 -> hard limit
 
 # ifndef MAX_FD
-#  define MAX_FD 10240
+#  define MAX_FD 1048576
 # endif
 
 # include <stdlib.h>
@@ -38,5 +38,7 @@ typedef struct s_line
 }	t_line;
 
 char	*get_next_line(int fd);
+void	initialise_buffer(t_line *buffer);
+size_t	get_len(t_line *buffer);
 
 #endif

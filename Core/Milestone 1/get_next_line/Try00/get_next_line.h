@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 13:17:28 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/10 10:17:06 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/14 23:07:59 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ typedef struct s_line
 }	t_line;
 
 char	*get_next_line(int fd);
+void	initialise_buffer(t_line *buffer);
+size_t	get_len(t_line *buffer);
 
 #endif
