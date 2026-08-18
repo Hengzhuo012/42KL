@@ -6,13 +6,14 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 22:20:40 by zheng             #+#    #+#             */
-/*   Updated: 2026/07/31 10:20:18 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/18 12:40:16 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "ft_printf_bonus.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>

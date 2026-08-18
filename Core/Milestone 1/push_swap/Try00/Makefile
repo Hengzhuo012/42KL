@@ -1,4 +1,4 @@
-NAME = libftprintf.a
+NAME = push_swap.a
 SRC = ft_printf.c print_conversions.c print_conversions_2.c print_conversions_3.c
 OBJ = $(SRC:.c=.o)
 
@@ -17,8 +17,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
-#rename libft.a into libftprintf.a
-#then add *.c for ft_print into libftprint.a
+#rename libft.a into push_swap.a
+#then add *.c for push_swap into push_swap.a
 
 $(NAME): $(OBJ) $(LIBFT)
 	cp $(LIBFT) $(NAME)

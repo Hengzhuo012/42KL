@@ -6,14 +6,14 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 15:23:53 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/05 21:18:59 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/18 12:37:49 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 
 typedef struct s_vars

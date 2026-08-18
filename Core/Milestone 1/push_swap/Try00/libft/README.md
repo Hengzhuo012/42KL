@@ -1,48 +1,73 @@
 *This project has been created as part of the 42 curriculum by zheng.*
 
-# ft_printf
+# Libft
 
 ## Description
-ft_printf is part of a project from 42KL milestone 1. It is used to recreate the printf function in the stdio.h library.
+Libft is the first project from 42 core programme. It is part of Milestone 0.
 
 ## Instructions
 List of commands to run with a description.
-* `make` - Compiles all source files into `libftprintf.a`.
-* `make libft.a` - Compiles all source files into `libftprintf.a`.
+* `make` - Compiles all source files into `libft.a`.
+* `make libft.a` - Compiles all source files into `libft.a`.
 * `make clean` - Removes object files.
-* `make fclean` - Removes object files and `libftprintf.a`.
+* `make fclean` - Removes object files and `libft.a`.
 * `make re` - Performs `fclean` followed by `make`.
-* `make bonus` - Compiles all bonus source files into `libftprintf.a`.
 
 ## Resources
 List of references and description of how AI was used.
 * [Man Pages] - https://man7.org/linux/man-pages/
 * **Usage of AI**
 	* **AI used** - Gemini and Google AI Overview
-	* **Debugging** - Check for edge cases that got ignored.
-	* **Explaination** - Understanding functions better for more complex functions such as if there is precision, 0 flag is ignored.
+	* **Debugging** - Check for edge cases that got ignored or some infinite loop made. For example, checking if the passed function is NULL.
+	* **Explaination** - Understanding functions better for more complex functions such as ft_lstmap for when del function is used.
 
-## Explaination
-Printf prints the characters, and prints the conversions differently. It returns the amount of characters outputted.
-### Mandatory Part
-* check for the conversion type `cspdiuxX%` and called the respective functions to handle it.
-	* **`c`** - prints a single character and return 1
-	* **`s`** - prints a string and return the length of string
-	* **`p`** - prints the pointer in hexadecimal format and return the length of the hexadecimal format
-	* **`d`** - prints an integer in base 10 and return the digits of the number and + 1 if the number is negative
-	* **`i`** - same as **`d`**
-	* **`u`** - prints an unsigned decimal number and return the digits of the number
-	* **`x`** - prints a number in hexadecimal lowercase format and return the length of the hexadecimal format
-	* **`X`** - same as **`x`** but with uppercase
-	* **`%`** - prints `%` and return 1
-### Bonus part
-* handles flags and precision - `-`, `0`, `.`, `#`, ` `, `+`
-	* `(width)` - min chars to output, right-align and padded with spaces
-	* `-(width)` - min chars to output, left-align and padded with spaces
-	* `0(width)` - min chars to output, right-align and padded with '0'
-	* `.(precision)`
-		* `string` - max chars output from the string
-		* `numbers` - min digits output, padded with '0' if needed, overwrites `0` flag, padded with spaces instead.
-	* `#` - applied on `x` and `X`, add prefix `0x` and `0X` respectively
-	* ` ` - applied on `d` and `i`, add prefix ` ` if number not negative
-	* `+` - same as ` ` but with prefix `+`, overwrites ` ` flag if both exsists
+## Library
+Functions created in the library with a detailed description.
+* Part 1 - Libc functions
+  * `ft_isalpha` - check if the character is an alphabet.
+  * `ft_isdigit` - check if the character is a digit.
+  * `ft_isalnum` - check if the character is a digit or an alphabet.
+  * `ft_isascii` - check if the character is in 7-bit ascii.
+  * `ft_isprint` - check if the character is printable.
+  * `ft_strlen` - calculate the length of a string.
+  * `ft_memset` - fill memory with a constant byte.
+  * `ft_bzero` - writing zero to a string.
+  * `ft_memcpy` - copy memory area.
+  * `ft_memmove` - copy memory area safely.
+  * `ft_strlcpy` - copy string to a specific size.
+  * `ft_strlcat` - concatenate string to a specific size.
+  * `ft_toupper` - convert character to uppercase.
+  * `ft_tolower` - convert character to lowercase.
+  * `ft_strchr` - locate character in string.
+  * `ft_strrchr` - locate character in string from the back.
+  * `ft_strncmp` - compare two strings up to n bytes.
+  * `ft_memchr` - scan memory for a character.
+  * `ft_memcmp` - compare memory areas.
+  * `ft_strnstr` - locate a substring in a string.
+  * `ft_atoi` - convert a string to an integer.
+  * `ft_calloc` - allocate and clear memory.
+  * `ft_strdup` - duplicate a string.
+
+* Part 2 - Additional functions
+  * `ft_substr` - extract a substring from a string.
+  * `ft_strjoin` - concatenate two strings into a new string.
+  * `ft_strtrim` - trim the beginning and end of a string with reference characters.
+  * `ft_split` - split a string using a delimiter character.
+  * `ft_itoa` - convert an integer to a string.
+  * `ft_strmapi` - apply a function to each character of a string.
+  * `ft_striteri` - apply a function to each character of a string with its index.
+  * `ft_putchar_fd` - output a character to a file descriptor.
+  * `ft_putstr_fd` - output a string to a file descriptor.
+  * `ft_putendl_fd` - output a string followed by a newline to a file descriptor.
+  * `ft_putnbr_fd` - output an integer to a file descriptor.
+
+* Part 3 - Linked list
+  * `ft_lstnew` - create a new list node.
+  * `ft_lstadd_front` - add a node at the beginning of a list.
+  * `ft_lstsize` - count the number of nodes in a list.
+  * `ft_lstlast` - find the last node of a list.
+  * `ft_lstadd_back` - add a node at the end of a list.
+  * `ft_lstdelone` - free a single node's content.
+  * `ft_lstclear` - free a list and all its nodes.
+  * `ft_lstiter` - iterate through a list and apply a function to each node.
+  * `ft_lstmap` - iterate through a list, apply a function on each node's content, and create a new list with the new contents.
