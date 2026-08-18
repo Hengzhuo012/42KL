@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 13:17:23 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/14 23:39:54 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/18 15:43:56 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	check_buffer(int fd, t_line *buffer, t_line *line)
 
 char	*get_next_line(int fd)
 {
-	static t_line	buffer = {0, 0, 0, NULL};
+	static t_line	buffer;
 	t_line			line;
 	int				status;
 

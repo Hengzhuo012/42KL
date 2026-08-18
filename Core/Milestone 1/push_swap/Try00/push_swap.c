@@ -6,15 +6,95 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:55:29 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/18 15:12:18 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/18 21:09:46 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static void	add_num_to_stack(t_list **stack, char **argv, int i)
+{
+	t_list	*new_node;
+
+	while (argv[i])
+	{
+		new_node = ft_lstnew(ft_atoi(argv[i]));
+		if (!new_node)
+		{
+			ft_lstclear(stack, free);
+			return ;
+		}
+		ft_lstadd_back(stack, new_node);
+		i++;
+	}
+}
+
+static int	compute_disorder(t_list *stack)
+{
+	t_list	*stack_cpy;
+	int		mistakes;
+	int		pairs;
+
+	mistakes = 0;
+	pairs = 0;
+	while (stack)
+	{
+		stack_cpy = stack->next;
+		while (stack_cpy)
+		{
+			pairs++;
+			if ((long int)stack->content > (long int)stack_cpy->content)
+				mistakes++;
+			stack_cpy = stack_cpy->next;
+		}
+		stack = stack->next;
+	}
+	if (pairs == 0)
+		return (0);
+	return (mistakes / pairs);
+}
+
+static void determine_and_proceed(t_flag *flags, t_list **stack,
+t_opt *opt, int disorder)
+{
+	if (flags->strat == 'a')
+	{
+		if (disorder < 0.2)
+			simple_sort(stack, opt);
+		else if (disorder >= 0.2 && disorder < 0.5)
+			medium_sort(stack, opt);
+		else if (disorder >= 0.5)
+			complex_sort(stack, opt);
+	}
+	else if (flags->strat == 's')
+		simple_sort(stack, opt);
+	else if (flags->strat == 'm')
+		medium_sort(stack, opt);
+	else if (flags->strat == 'c')
+		complex_sort(stack, opt);
+}
+
 int	main(int argc, char **argv)
 {
 	t_flag	flags;
+	t_list	*stack;
+	t_opt	opt;
+	int		disorder;
+	int		i;
 
-	check_inputs(argv, &flags);
+	if (argc < 2)
+		return (0);
+	init_t_flag(&flags);
+	i = check_inputs(argv, &flags);
+	if (i < 0)
+	{
+		print_error();
+		return (1);
+	}
+	stack = NULL;
+	add_num_to_stack(&stack, argv, i);
+	disorder = compute_disorder(stack);
+	determine_and_proceed(&flags, &stack, &opt);
+	ft_lstclear(&stack, free);
+	return (0);
 }
