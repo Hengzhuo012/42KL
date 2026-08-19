@@ -17,10 +17,13 @@ List of commands to run with a description.
 ## Resources
 List of references and description of how AI was used.
 * [Man Pages] - https://man7.org/linux/man-pages/
+* Introduction to Algorithms - https://www.cs.mcgill.ca/~akroit/math/compsci/Cormen%20Introduction%20to%20Algorithms.pdf
+* Bucket Sort - https://www.geeksforgeeks.org/dsa/bucket-sort-2/
+* Merge Sort - https://www.geeksforgeeks.org/dsa/merge-sort/
 * **Usage of AI**
 	* **AI used** - Gemini and Google AI Overview
 	* **Debugging** - Check for edge cases that got ignored.
-	* **Explaination** - Understanding functions better for more complex functions such as if there is precision, 0 flag is ignored.
+	* **Explaination** - Understanding the question requirements better in subject.pdf
 
 ## Explaination
 
@@ -45,9 +48,10 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 
 * Strategies
 	* **Simple algorithm** (O(n^2))
-		* Bubble Sort Adaption
+		* Bubble sort adaption
 	* **Medium algorithm** (O(n * sqrt(n)))
-		* 
+		* Bucket sort adaptions with sqrt(n) buckets.
+			Group the values 
 	* **Complex algorithm** (O(n log(n)))
 		* 
 

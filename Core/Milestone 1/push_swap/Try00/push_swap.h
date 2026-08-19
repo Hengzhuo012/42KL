@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:42:54 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/18 19:15:18 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/18 21:55:07 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ typedef struct s_opt
 	int	rrr;
 }	t_opt;
 
-//check_inputs.c
 int		check_inputs(char **argv, t_flag *flags);
 
-//initialise.c
-void	initialise_t_opt(t_opt *opt);
-
-//print_output.c
+void	init_t_opt(t_opt *opt);
+void	init_t_flag(t_flag *flags);
 void	print_error(void);
+
+void	simple_sort(t_flag *flags, t_list **stack, t_opt *opt);
+void	medium_sort(t_flag *flags, t_list **stack, t_opt *opt);
+void	complex_sort(t_flag *flags, t_list **stack, t_opt *opt);
 
 #endif
