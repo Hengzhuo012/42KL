@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:55:29 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/19 15:21:16 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/20 14:33:23 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static double	compute_disorder(t_list *stack)
 	return ((double)mistakes / pairs);
 }
 
-static void determine_and_proceed(t_flag *flags, t_list **stack,
+static void	determine_and_proceed(t_flag *flags, t_list **stack,
 t_opt *opt, double disorder)
 {
 	if (flags->strat == 'a')

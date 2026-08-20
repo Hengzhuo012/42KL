@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:42:54 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/18 21:55:07 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/20 16:58:55 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ void	print_error(void);
 void	simple_sort(t_flag *flags, t_list **stack, t_opt *opt);
 void	medium_sort(t_flag *flags, t_list **stack, t_opt *opt);
 void	complex_sort(t_flag *flags, t_list **stack, t_opt *opt);
+
+int		medium_sqrt(int n);
+int		get_rank(t_list *stack, t_list *bucket, int val);
+int		get_max_pos(t_list *bucket);
 
 #endif

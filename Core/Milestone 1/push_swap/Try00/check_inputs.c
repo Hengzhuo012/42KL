@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 11:59:49 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/19 15:20:48 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/20 14:31:25 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static int	check_values(char **argv, int i)
 	}
 	return (1);
 }
-
 
 // return -1 if no number inputs, 0 if failed, index of the 1st number if pass
 int	check_inputs(char **argv, t_flag *flags, int *i)
