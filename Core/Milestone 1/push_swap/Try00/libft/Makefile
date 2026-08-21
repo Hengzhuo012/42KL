@@ -10,7 +10,8 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen
 	ft_printf_bonus.c check_bonus.c initialise_bonus.c \
 	print_helper_numbers_bonus.c print_helper_flags_bonus.c \
 	print_char_bonus.c print_decimal_bonus.c print_hexa_number_bonus.c \
-	print_hexa_pointer_bonus.c print_string_bonus.c print_unsigned_decimal_bonus.c
+	print_hexa_pointer_bonus.c print_string_bonus.c print_unsigned_decimal_bonus.c \
+	get_next_line_bonus.c get_next_line_utils_bonus.c
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
