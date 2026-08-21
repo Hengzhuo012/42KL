@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 22:20:40 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/18 12:40:16 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/21 15:35:10 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "ft_printf_bonus.h"
+# include "get_next_line_bonus.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
