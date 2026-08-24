@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:23:04 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/25 01:11:31 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/25 02:24:25 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ static void	print_number(int number)
 static void	print_strategy(t_flag *flags, double disorder)
 {
 	if (flags->strat == 's')
-		write(2, "Simple / O(n^2)", ft_strlen("Simple / O(n^2)"));
+		write(2, "Simple / O(n²)", ft_strlen("Simple / O(n²)"));
 	else if (flags->strat == 'm')
-		write(2, "Medium / O(n*sqrt(n))",
-			ft_strlen("Medium / O(n*sqrt(n))"));
+		write(2, "Medium / O(n√n)",
+			ft_strlen("Medium / O(n√n)"));
 	else if (flags->strat == 'c')
 		write(2, "Complex / O(n log n)", ft_strlen("Complex / O(n log n)"));
 	else if (disorder < 0.2)
-		write(2, "Simple / O(n^2)", ft_strlen("Simple / O(n^2)"));
+		write(2, "Adaptive / O(n²)", ft_strlen("Adaptive / O(n²)"));
 	else if (disorder < 0.5)
-		write(2, "Medium / O(n*sqrt(n))",
-			ft_strlen("Medium / O(n*sqrt(n))"));
+		write(2, "Adaptive / O(n√n)",
+			ft_strlen("Adaptive / O(n√n)"));
 	else
-		write(2, "Complex / O(n log n)", ft_strlen("Complex / O(n log n)"));
+		write(2, "Adaptive / O(n log n)", ft_strlen("Adaptive / O(n log n)"));
 }
 
 static void	print_opt(t_opt *opt)

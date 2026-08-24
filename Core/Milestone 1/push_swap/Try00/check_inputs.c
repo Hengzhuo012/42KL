@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 11:59:49 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/24 14:56:10 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/25 02:07:23 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int	check_flag(char *str, t_flag *flags)
 		flags->strat = 'm';
 	else if (ft_strncmp(str, "--complex", ft_strlen("--complex") + 1) == 0)
 		flags->strat = 'c';
+	else if (ft_strncmp(str, "--adaptive", ft_strlen("--adaptive") + 1) == 0)
+		return (1);
 	else if (ft_strncmp(str, "--bench", ft_strlen("--bench") + 1) == 0)
 		flags->bench = 'b';
 	else

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 21:37:22 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/20 16:59:09 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/25 02:16:04 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ t_flag *flags, t_opt *opt)
 		{
 			pb(stack, bucket, flags, opt);
 			rank = get_rank(*stack, *bucket, (int)(long)(*bucket)->content);
-			if (ft_lstsize(*bucket) > 1
-				&& rank < lower + (bucket_size / 2))
+			if ((*bucket)->next && rank < lower + (bucket_size / 2))
 				rb(stack, bucket, flags, opt);
 			lower++;
 			upper++;
@@ -48,9 +47,9 @@ t_flag *flags, t_opt *opt)
 	int	pos;
 	int	i;
 
+	size = ft_lstsize(*bucket);
 	while (*bucket)
 	{
-		size = ft_lstsize(*bucket);
 		pos = get_max_pos(*bucket);
 		i = 0;
 		if (pos <= size / 2)
@@ -64,6 +63,7 @@ t_flag *flags, t_opt *opt)
 				rrb(stack, bucket, flags, opt);
 		}
 		pa(stack, bucket, flags, opt);
+		size--;
 	}
 }
 

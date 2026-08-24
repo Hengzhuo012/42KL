@@ -1,5 +1,5 @@
-NAME = push_swap.a
-SRC = print_output.c check_inputs.c initialise.c \
+NAME = push_swap
+SRC = push_swap.c print_output.c check_inputs.c initialise.c \
 	op_push.c op_rotate.c op_rrotate.c op_swap.c \
 	simple_sort.c \
 	medium_sort.c medium_sort_utils.c \
@@ -19,8 +19,7 @@ all: $(NAME)
 #then add *.c for push_swap into push_swap.a
 
 $(NAME): $(OBJ) $(LIBFT)
-	cp $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

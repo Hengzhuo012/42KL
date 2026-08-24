@@ -47,24 +47,24 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 	* `rrr` - `rra` and `rrb` at the same time.
 
 * Strategies
-	* **Simple algorithm** (O(n^2))
+	* **Simple algorithm** (O(n²))
 		* Bubble sort adaption
-	* **Medium algorithm** (O(n * sqrt(n)))
-		* Bucket sort adaptions with sqrt(n) buckets.
+	* **Medium algorithm** (O(n√n))
+		* Bucket sort adaptions with √n buckets.
 			Group the values 
 	* **Complex algorithm** (O(n log(n)))
 		* 
 
 * Flags
-	* `--simple` - Forces the use of O(n^2) algorithm.
-	* `--medium` - Forces the use of O(n * sqrt(n)) algorithm.
+	* `--simple` - Forces the use of O(n²) algorithm.
+	* `--medium` - Forces the use of O(n√n) algorithm.
 	* `--complex` - Forces the use of O(n log(n)) algorithm.
 	* `--adaptive` - Forces the use of adaptive algorithm based on disorder. This is the default behavior if no selector is given.
 		Disorder - number between 0 and 1 that tells how far the initial `stack a` is from being sorted.
 		If the numbers are already in the right order, the disorder is 0. If they are in the worst possible order, the disorder is 1.
 		To calculate it, each time a bigger number appears before a smaller one, the closer the disorder is to 1.
-		* **Low disorder** - if disorder < 0.2, use O(n^2) algorithm.
-		* **Medium disorder** - if 0.2 <= disorder < 0.5, use O(n * sqrt(n)) algorithm.
+		* **Low disorder** - if disorder < 0.2, use O(n²) algorithm.
+		* **Medium disorder** - if 0.2 <= disorder < 0.5, use O(n√n) algorithm.
 		* **High disorder** - if disorder >= 0.5, use O(n log(n)) algorithm.
 	* `--bench` - benchmark mode
 		After sorting, display
