@@ -51,6 +51,7 @@ t_flag *flags, t_opt *opt)
 	{
 		size = ft_lstsize(*bucket);
 		pos = get_max_pos(*bucket);
+		i = 0;
 		if (pos <= size / 2)
 		{
 			while (i++ < pos)

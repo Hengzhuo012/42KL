@@ -1,12 +1,10 @@
 NAME = push_swap.a
-SRC = ft_printf.c print_conversions.c print_conversions_2.c print_conversions_3.c
+SRC = print_output.c check_inputs.c initialise.c \
+	op_push.c op_rotate.c op_rrotate.c op_swap.c \
+	simple_sort.c \
+	medium_sort.c medium_sort_utils.c \
+	complex_sort.c
 OBJ = $(SRC:.c=.o)
-
-BONUS_SRC = ft_printf_bonus.c check_bonus.c initialise_bonus.c \
-	print_helper_numbers_bonus.c print_helper_flags_bonus.c \
-	print_char_bonus.c print_decimal_bonus.c print_hexa_number_bonus.c \
-	print_hexa_pointer_bonus.c print_string_bonus.c print_unsigned_decimal_bonus.c
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -24,10 +22,6 @@ $(NAME): $(OBJ) $(LIBFT)
 	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJ)
 
-bonus: $(BONUS_OBJ) $(LIBFT)
-	cp $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(BONUS_OBJ)
-
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
@@ -44,4 +38,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:55:29 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/20 14:33:23 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/24 17:57:55 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	stack = NULL;
+	init_t_opt(&opt);
 	add_num_to_stack(&stack, argv, i);
 	disorder = compute_disorder(stack);
 	determine_and_proceed(&flags, &stack, &opt, disorder);
+	if (flags.bench)
+		print_bench(&flags, &opt, disorder);
 	ft_lstclear(&stack, NULL);
 	return (0);
 }
