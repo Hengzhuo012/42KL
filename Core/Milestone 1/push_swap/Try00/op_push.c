@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 12:16:36 by namak             #+#    #+#             */
-/*   Updated: 2026/08/24 16:21:48 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/25 00:58:53 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	pa(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	if (flags->bench)
 		opt->pa++;
 	else
-	{
-		(void)opt;
 		write(1, "pa\n", 3);
-	}
 }
 
 void	pb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -44,8 +41,5 @@ void	pb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	if (flags->bench)
 		opt->pb++;
 	else
-	{
-		(void)opt;
 		write(1, "pb\n", 3);
-	}
 }

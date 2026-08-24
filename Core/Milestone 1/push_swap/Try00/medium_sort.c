@@ -30,7 +30,8 @@ t_flag *flags, t_opt *opt)
 		{
 			pb(stack, bucket, flags, opt);
 			rank = get_rank(*stack, *bucket, (int)(long)(*bucket)->content);
-			if (rank < lower + (bucket_size / 2))
+			if (ft_lstsize(*bucket) > 1
+				&& rank < lower + (bucket_size / 2))
 				rb(stack, bucket, flags, opt);
 			lower++;
 			upper++;

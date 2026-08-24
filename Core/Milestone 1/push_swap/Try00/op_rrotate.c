@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:46:13 by namak             #+#    #+#             */
-/*   Updated: 2026/08/24 16:21:54 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/25 00:59:26 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	rra(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	if (flags->bench)
 		opt->rra++;
 	else
-	{
-		(void)opt;
 		write(1, "rra\n", 4);
-	}
 }
 
 void	rrb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -48,10 +45,7 @@ void	rrb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	if (flags->bench)
 		opt->rrb++;
 	else
-	{
-		(void)opt;
 		write(1, "rrb\n", 4);
-	}
 }
 
 void	rrr(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -61,8 +55,5 @@ void	rrr(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	if (flags->bench)
 		opt->rrr++;
 	else
-	{
-		(void)opt;
 		write(1, "rrr\n", 4);
-	}
 }
