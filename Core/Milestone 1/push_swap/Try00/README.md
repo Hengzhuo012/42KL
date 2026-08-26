@@ -19,7 +19,7 @@ List of references and description of how AI was used.
 * [Man Pages] - https://man7.org/linux/man-pages/
 * Introduction to Algorithms - https://www.cs.mcgill.ca/~akroit/math/compsci/Cormen%20Introduction%20to%20Algorithms.pdf
 * Bucket Sort - https://www.geeksforgeeks.org/dsa/bucket-sort-2/
-* Merge Sort - https://www.geeksforgeeks.org/dsa/merge-sort/
+* Radix Sort - https://www.geeksforgeeks.org/dsa/radix-sort/
 * **Usage of AI**
 	* **AI used** - Gemini and Google AI Overview
 	* **Debugging** - Check for edge cases that got ignored.

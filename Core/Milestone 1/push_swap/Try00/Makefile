@@ -1,9 +1,8 @@
 NAME = push_swap
 SRC = push_swap.c print_output.c check_inputs.c initialise.c \
 	op_push.c op_rotate.c op_rrotate.c op_swap.c \
-	simple_sort.c \
-	medium_sort.c medium_sort_utils.c \
-	complex_sort.c
+	simple_sort.c medium_sort.c complex_sort.c \
+	sort_utils.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
