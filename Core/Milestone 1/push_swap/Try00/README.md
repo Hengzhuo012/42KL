@@ -48,20 +48,24 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 
 * Strategies
 	* **Simple algorithm** (O(n²))
-		* Bubble sort adaption
-			
+		* Selection sort adaption
+			Keeps repeating on moving the smallest value of stack a to the top, then push to stack b.
+			On worst case,
+			* Space complexity = O(n)
+			* Time complexity = O(n²)
 	* **Medium algorithm** (O(n√n))
 		* Bucket sort adaptions with √n buckets.
 			Group the values with similar ranks.
 			On worst case,
 			* Space complexity = O(n)
-			* Time complexity = O(n ^ 3)
+			* Time complexity = O(n²)
+				But on balanced inputs, it should run with time complexity of O(n√n), only many inputs with large gaps of rank will degrade to O(n²).
 	* **Complex algorithm** (O(n log(n)))
 		* Radix sort adaptions with binaries.
 			Sort the rightmost bit first, then loop till the leftmost bit.
 			On worst case,
 			* Space complexity = O(n)
-			* Time complexity = O(n² log n)
+			* Time complexity = O(n log(n))
 
 * Flags
 	* `--simple` - Forces the use of O(n²) algorithm.

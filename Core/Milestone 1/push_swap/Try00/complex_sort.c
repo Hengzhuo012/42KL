@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 16:47:06 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/27 12:57:25 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/28 01:31:57 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ static int	get_max_bits(int max_rank)
 	while (max_rank >> max_bits)
 		max_bits++;
 	return (max_bits);
-}
-
-static int	is_sorted(t_list *stack)
-{
-	while (stack && stack->next)
-	{
-		if ((int)(long)stack->content
-			> (int)(long)stack->next->content)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
 }
 
 static void	complex_sort_helper(t_flag *flags,

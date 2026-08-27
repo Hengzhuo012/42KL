@@ -6,11 +6,23 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 16:49:37 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/27 13:33:29 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/28 01:32:10 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_sorted(t_list *stack)
+{
+	while (stack && stack->next)
+	{
+		if ((int)(long)stack->content
+			> (int)(long)stack->next->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
 
 static t_list	*copy_stack(t_list *stack)
 {
@@ -47,22 +59,6 @@ int	set_to_ranks(t_list *stack)
 	}
 	ft_lstclear(&original, free_stack_content);
 	return (1);
-}
-
-int	medium_sqrt(int n)
-{
-	int	r;
-
-	if (n <= 0)
-		return (0);
-	r = 1;
-	while (r <= n / r)
-	{
-		if (r * r == n)
-			return (r);
-		r++;
-	}
-	return (r - 1);
 }
 
 int	get_rank(t_list *stack, t_list *bucket, int val)

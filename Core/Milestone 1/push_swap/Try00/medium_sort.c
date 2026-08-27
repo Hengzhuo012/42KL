@@ -6,11 +6,27 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 21:37:22 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/25 02:16:04 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/28 01:33:26 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	medium_sqrt(int n)
+{
+	int	r;
+
+	if (n <= 0)
+		return (0);
+	r = 1;
+	while (r <= n / r)
+	{
+		if (r * r == n)
+			return (r);
+		r++;
+	}
+	return (r - 1);
+}
 
 static void	add_stack_to_bucket(t_list **stack, t_list **bucket,
 t_flag *flags, t_opt *opt)
@@ -71,6 +87,8 @@ void	medium_sort(t_flag *flags, t_list **stack, t_opt *opt)
 	t_list	*bucket;
 
 	bucket = NULL;
+	if (is_sorted(*stack_a))
+		return ;
 	add_stack_to_bucket(stack, &bucket, flags, opt);
 	sort_bucket_add_to_stack(stack, &bucket, flags, opt);
 }
