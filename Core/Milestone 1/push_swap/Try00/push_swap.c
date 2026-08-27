@@ -6,13 +6,13 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:55:29 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/25 02:12:28 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/27 14:07:03 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	add_num_to_stack(t_list **stack, char **argv, int i)
+static int	add_num_to_stack(t_list **stack, char **argv, int i)
 {
 	t_list	*new_node;
 
@@ -22,11 +22,18 @@ static void	add_num_to_stack(t_list **stack, char **argv, int i)
 		if (!new_node)
 		{
 			ft_lstclear(stack, NULL);
-			return ;
+			return (0);
 		}
 		ft_lstadd_back(stack, new_node);
 		i++;
 	}
+	return (1);
+}
+
+static int	allocation_error(void)
+{
+	print_error();
+	return (1);
 }
 
 static double	compute_disorder(t_list *stack)
@@ -61,9 +68,9 @@ t_opt *opt, double disorder)
 	{
 		if (disorder < 0.2)
 			simple_sort(flags, stack, opt);
-		else if (disorder >= 0.2 && disorder < 0.5)
+		else if (disorder < 0.7)
 			medium_sort(flags, stack, opt);
-		else if (disorder >= 0.5)
+		else
 			complex_sort(flags, stack, opt);
 	}
 	else if (flags->strat == 's')
@@ -87,14 +94,13 @@ int	main(int argc, char **argv)
 	init_t_flag(&flags);
 	i = check_inputs(argv, &flags);
 	if (i <= 0)
-	{
-		print_error();
-		return (1);
-	}
+		return (allocation_error());
 	stack = NULL;
 	init_t_opt(&opt);
-	add_num_to_stack(&stack, argv, i);
+	if (!add_num_to_stack(&stack, argv, i))
+		return (allocation_error());
 	disorder = compute_disorder(stack);
+	set_to_ranks(stack);
 	determine_and_proceed(&flags, &stack, &opt, disorder);
 	if (flags.bench)
 		print_bench(&flags, &opt, disorder);

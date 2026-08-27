@@ -6,7 +6,7 @@
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 16:47:06 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/27 00:44:02 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/27 12:57:25 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,51 @@ static int	get_max_bits(int max_rank)
 	return (max_bits);
 }
 
-void	complex_sort(t_flag *flags, t_list **stack_a, t_opt *opt)
+static int	is_sorted(t_list *stack)
+{
+	while (stack && stack->next)
+	{
+		if ((int)(long)stack->content
+			> (int)(long)stack->next->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+static void	complex_sort_helper(t_flag *flags,
+t_list **stack_a, t_list **stack_b, t_opt *opt)
 {
 	int		i;
 	int		j;
 	int		size;
 	int		max_bits;
-	t_list	*stack_b;
 
 	size = ft_lstsize(*stack_a);
 	max_bits = get_max_bits(size - 1);
-	stack_b = NULL;
 	i = 0;
 	while (i < max_bits)
 	{
 		j = 0;
 		while (j++ < size)
 		{
-			if ((get_rank(*stack_a, stack_b,
-						(int)(long)(*stack_a)->content) >> i) & 1)
-				ra(stack_a, &stack_b, flags, opt);
+			if (((int)(long)(*stack_a)->content >> i) & 1)
+				ra(stack_a, stack_b, flags, opt);
 			else
-				pb(stack_a, &stack_b, flags, opt);
+				pb(stack_a, stack_b, flags, opt);
 		}
-		while (stack_b)
-			pa(stack_a, &stack_b, flags, opt);
+		while (*stack_b)
+			pa(stack_a, stack_b, flags, opt);
 		i++;
 	}
+}
+
+void	complex_sort(t_flag *flags, t_list **stack_a, t_opt *opt)
+{
+	t_list	*stack_b;
+
+	stack_b = NULL;
+	if (is_sorted(*stack_a))
+		return ;
+	complex_sort_helper(flags, stack_a, &stack_b, opt);
 }

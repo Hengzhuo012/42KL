@@ -25,11 +25,10 @@ t_flag *flags, t_opt *opt)
 	upper = bucket_size;
 	while (*stack)
 	{
-		rank = get_rank(*stack, *bucket, (int)(long)(*stack)->content);
+		rank = (int)(long)(*stack)->content;
 		if (rank <= upper)
 		{
 			pb(stack, bucket, flags, opt);
-			rank = get_rank(*stack, *bucket, (int)(long)(*bucket)->content);
 			if ((*bucket)->next && rank < lower + (bucket_size / 2))
 				rb(stack, bucket, flags, opt);
 			lower++;

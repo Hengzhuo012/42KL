@@ -1,16 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   medium_sort_utils.c                                :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 16:49:37 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/20 16:58:48 by zheng            ###   ########.fr       */
+/*   Updated: 2026/08/27 13:33:29 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static t_list	*copy_stack(t_list *stack)
+{
+	t_list	*copy;
+	t_list	*new_node;
+
+	copy = NULL;
+	while (stack)
+	{
+		new_node = ft_lstnew(stack->content);
+		if (!new_node)
+		{
+			ft_lstclear(&copy, NULL);
+			return (NULL);
+		}
+		ft_lstadd_back(&copy, new_node);
+		stack = stack->next;
+	}
+	return (copy);
+}
+
+void	set_to_ranks(t_list *stack)
+{
+	t_list	*original;
+
+	original = copy_stack(stack);
+	if (!original && stack)
+		return ;
+	while (stack)
+	{
+		stack->content = (void *)(long)get_rank(original, NULL,
+				(int)(long)stack->content);
+		stack = stack->next;
+	}
+	ft_lstclear(&original, NULL);
+}
 
 int	medium_sqrt(int n)
 {
