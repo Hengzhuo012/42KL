@@ -42,6 +42,7 @@ void			init_t_opt(t_opt *opt);
 void			init_t_flag(t_flag *flags);
 void			print_error(void);
 void			print_bench(t_flag *flags, t_opt *opt, double disorder);
+void			free_stack_content(void *content);
 
 void			simple_sort(t_flag *flags, t_list **stack, t_opt *opt);
 void			medium_sort(t_flag *flags, t_list **stack, t_opt *opt);
@@ -60,7 +61,7 @@ void			rrb(t_list **a, t_list **b, t_flag *flags, t_opt *opt);
 void			rrr(t_list **a, t_list **b, t_flag *flags, t_opt *opt);
 
 int				medium_sqrt(int n);
-void			set_to_ranks(t_list *stack);
+int				set_to_ranks(t_list *stack);
 int				get_rank(t_list *stack, t_list *bucket, int val);
 int				get_max_pos(t_list *bucket);
 

@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+void	free_stack_content(void *content)
+{
+	(void)content;
+}
+
 void	init_t_opt(t_opt *opt)
 {
 	opt->sa = 0;

@@ -21,7 +21,7 @@ static int	add_num_to_stack(t_list **stack, char **argv, int i)
 		new_node = ft_lstnew((void *)(long)ft_atoi(argv[i]));
 		if (!new_node)
 		{
-			ft_lstclear(stack, NULL);
+			ft_lstclear(stack, free_stack_content);
 			return (0);
 		}
 		ft_lstadd_back(stack, new_node);
@@ -100,10 +100,11 @@ int	main(int argc, char **argv)
 	if (!add_num_to_stack(&stack, argv, i))
 		return (allocation_error());
 	disorder = compute_disorder(stack);
-	set_to_ranks(stack);
+	if (!set_to_ranks(stack))
+		return (allocation_error());
 	determine_and_proceed(&flags, &stack, &opt, disorder);
 	if (flags.bench)
 		print_bench(&flags, &opt, disorder);
-	ft_lstclear(&stack, NULL);
+	ft_lstclear(&stack, free_stack_content);
 	return (0);
 }

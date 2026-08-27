@@ -23,7 +23,7 @@ static t_list	*copy_stack(t_list *stack)
 		new_node = ft_lstnew(stack->content);
 		if (!new_node)
 		{
-			ft_lstclear(&copy, NULL);
+			ft_lstclear(&copy, free_stack_content);
 			return (NULL);
 		}
 		ft_lstadd_back(&copy, new_node);
@@ -32,20 +32,21 @@ static t_list	*copy_stack(t_list *stack)
 	return (copy);
 }
 
-void	set_to_ranks(t_list *stack)
+int	set_to_ranks(t_list *stack)
 {
 	t_list	*original;
 
 	original = copy_stack(stack);
 	if (!original && stack)
-		return ;
+		return (0);
 	while (stack)
 	{
 		stack->content = (void *)(long)get_rank(original, NULL,
 				(int)(long)stack->content);
 		stack = stack->next;
 	}
-	ft_lstclear(&original, NULL);
+	ft_lstclear(&original, free_stack_content);
+	return (1);
 }
 
 int	medium_sqrt(int n)
