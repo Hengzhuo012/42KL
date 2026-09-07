@@ -25,7 +25,7 @@ List of references and description of how AI was used.
 	* **Debugging** - Check for edge cases that got ignored.
 	* **Explaination** - Understanding the question requirements better in subject.pdf
 
-## Explaination
+## Explanation
 
 ### Mandatory Part
 Sort **`stack a`** containing a random amoung of numbers in ascending order, with an empty **`stack b`**.
@@ -51,9 +51,9 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 		* Bubble sort adaption
 	* **Medium algorithm** (O(n * sqrt(n)))
 		* Bucket sort adaptions with sqrt(n) buckets.
-			Group the values 
+			Group the values
 	* **Complex algorithm** (O(n log(n)))
-		* 
+		*
 
 * Flags
 	* `--simple` - Forces the use of O(n^2) algorithm.
@@ -76,3 +76,8 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 
 ### Bonus Part
 Recreate the "checker" program, provided in the project list.
+
+### Contributions
+* zheng - main program, parsing, medium sort & complex sort
+* namak - operations, simple sort & debugging
+

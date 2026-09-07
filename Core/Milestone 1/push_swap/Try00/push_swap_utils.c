@@ -6,7 +6,7 @@
 /*   By: namak <namak@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 16:24:46 by namak             #+#    #+#             */
-/*   Updated: 2026/09/07 09:10:00 by namak            ###   ########.fr       */
+/*   Updated: 2026/09/07 11:05:16 by namak            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**create_args(int argc, char **argv)
 	char	**args;
 	int		i;
 
-	joined = ft_strdup("dummy ");
+	joined = ft_strdup("--flag ");
 	i = 1;
 	while (i < argc)
 	{

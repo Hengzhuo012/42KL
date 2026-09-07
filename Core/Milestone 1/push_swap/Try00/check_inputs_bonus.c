@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_inputs.c                                     :+:      :+:    :+:   */
+/*   check_inputs_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 11:59:49 by zheng             #+#    #+#             */
-/*   Updated: 2026/08/25 02:07:23 by zheng            ###   ########.fr       */
+/*   Updated: 2026/09/07 15:46:46 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-static int	check_flag(char *str, t_flag *flags)
-{
-	if (!str)
-		return (0);
-	if (ft_strncmp(str, "--simple", ft_strlen("--simple") + 1) == 0)
-		flags->strat = 's';
-	else if (ft_strncmp(str, "--medium", ft_strlen("--medium") + 1) == 0)
-		flags->strat = 'm';
-	else if (ft_strncmp(str, "--complex", ft_strlen("--complex") + 1) == 0)
-		flags->strat = 'c';
-	else if (ft_strncmp(str, "--adaptive", ft_strlen("--adaptive") + 1) == 0)
-		return (1);
-	else if (ft_strncmp(str, "--bench", ft_strlen("--bench") + 1) == 0)
-		flags->bench = 'b';
-	else
-		return (0);
-	return (1);
-}
+#include "checker_bonus.h"
 
 static int	check_duplicate(char **argv, int i)
 {
@@ -94,13 +75,11 @@ static int	check_values(char **argv, int i)
 }
 
 // return -1 if no number inputs, 0 if failed, index of the 1st number if pass
-int	check_inputs(char **argv, t_flag *flags)
+int	check_inputs_bonus(char **argv)
 {
 	int	i;
 
 	i = 1;
-	while (check_flag(argv[i], flags))
-		i++;
 	if (!argv[i])
 		return (-1);
 	if (check_values(argv, i) && check_duplicate(argv, i))
@@ -112,6 +91,6 @@ int	check_inputs(char **argv, t_flag *flags)
 // int	main(int argc, char **argv)
 // {
 // 	(void)argc;
-// 	printf("%d", check_values(argv, 1));
+// 	printf("%d", check_inputs_bonus(argv));
 // 	return (0);
 // }
