@@ -19,13 +19,13 @@ List of references and description of how AI was used.
 * [Man Pages] - https://man7.org/linux/man-pages/
 * Introduction to Algorithms - https://www.cs.mcgill.ca/~akroit/math/compsci/Cormen%20Introduction%20to%20Algorithms.pdf
 * Bucket Sort - https://www.geeksforgeeks.org/dsa/bucket-sort-2/
-* Merge Sort - https://www.geeksforgeeks.org/dsa/merge-sort/
+* Radix Sort - https://www.geeksforgeeks.org/dsa/radix-sort/
 * **Usage of AI**
 	* **AI used** - Gemini and Google AI Overview
 	* **Debugging** - Check for edge cases that got ignored.
 	* **Explaination** - Understanding the question requirements better in subject.pdf
 
-## Explanation
+## Explaination
 
 ### Mandatory Part
 Sort **`stack a`** containing a random amoung of numbers in ascending order, with an empty **`stack b`**.
@@ -47,25 +47,37 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 	* `rrr` - `rra` and `rrb` at the same time.
 
 * Strategies
-	* **Simple algorithm** (O(n^2))
-		* Bubble sort adaption
-	* **Medium algorithm** (O(n * sqrt(n)))
-		* Bucket sort adaptions with sqrt(n) buckets.
-			Group the values
+	* **Simple algorithm** (O(n²))
+		* Selection sort adaption
+			Keeps repeating on moving the smallest value of stack a to the top, then push to stack b.
+			On worst case,
+			* Space complexity = O(n)
+			* Time complexity = O(n²)
+	* **Medium algorithm** (O(n√n))
+		* Bucket sort adaptions with √n buckets.
+			Group the values with similar ranks.
+			On worst case,
+			* Space complexity = O(n)
+			* Time complexity = O(n²)
+				But on balanced inputs, it should run with time complexity of O(n√n), only many inputs with large gaps of rank will degrade to O(n²).
 	* **Complex algorithm** (O(n log(n)))
-		*
+		* Radix sort adaptions with binaries.
+			Sort the rightmost bit first, then loop till the leftmost bit.
+			On worst case,
+			* Space complexity = O(n)
+			* Time complexity = O(n log(n))
 
 * Flags
-	* `--simple` - Forces the use of O(n^2) algorithm.
-	* `--medium` - Forces the use of O(n * sqrt(n)) algorithm.
+	* `--simple` - Forces the use of O(n²) algorithm.
+	* `--medium` - Forces the use of O(n√n) algorithm.
 	* `--complex` - Forces the use of O(n log(n)) algorithm.
 	* `--adaptive` - Forces the use of adaptive algorithm based on disorder. This is the default behavior if no selector is given.
 		Disorder - number between 0 and 1 that tells how far the initial `stack a` is from being sorted.
 		If the numbers are already in the right order, the disorder is 0. If they are in the worst possible order, the disorder is 1.
 		To calculate it, each time a bigger number appears before a smaller one, the closer the disorder is to 1.
-		* **Low disorder** - if disorder < 0.2, use O(n^2) algorithm.
-		* **Medium disorder** - if 0.2 <= disorder < 0.5, use O(n * sqrt(n)) algorithm.
-		* **High disorder** - if disorder >= 0.5, use O(n log(n)) algorithm.
+		* **Low disorder** - if disorder < 0.2, use O(n²) algorithm.
+		* **Medium disorder** - if 0.2 <= disorder < 0.7, use O(n√n) algorithm.
+		* **High disorder** - if disorder >= 0.7, use O(n log(n)) algorithm.
 	* `--bench` - benchmark mode
 		After sorting, display
 		* The computed disorder (% with two decimals).
@@ -76,8 +88,3 @@ Sort **`stack a`** containing a random amoung of numbers in ascending order, wit
 
 ### Bonus Part
 Recreate the "checker" program, provided in the project list.
-
-### Contributions
-* zheng - main program, parsing, medium sort & complex sort
-* namak - operations, simple sort & debugging
-
