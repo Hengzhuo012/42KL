@@ -6,7 +6,7 @@
 /*   By: namak <namak@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 14:25:58 by namak             #+#    #+#             */
-/*   Updated: 2026/09/04 10:01:59 by namak            ###   ########.fr       */
+/*   Updated: 2026/09/08 11:02:17 by namak            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ void	simple_sort(t_flag *flags, t_list **a, t_opt *opt)
 		return ;
 	size = ft_lstsize(*a);
 	b = NULL;
+	sort_check = is_sorted(*a);
+	if (size == 2 && !sort_check)
+		sort_two(a, &b, flags, opt);
+	else if (size == 3 && !sort_check)
+		sort_three(a, &b, flags, opt);
 	while (*a)
 	{
 		sort_logic(flags, a, &b, opt);
@@ -108,10 +113,6 @@ void	simple_sort(t_flag *flags, t_list **a, t_opt *opt)
 			break ;
 		size--;
 	}
-	if (size == 2 && !sort_check)
-		sort_two(a, &b, flags, opt);
-	else if (size == 3 && !sort_check)
-		sort_three(a, &b, flags, opt);
 	while (b)
 		pa(a, &b, flags, opt);
 }

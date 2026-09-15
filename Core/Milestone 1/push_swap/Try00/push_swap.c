@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: namak <namak@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zheng <zheng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 10:55:29 by zheng             #+#    #+#             */
-/*   Updated: 2026/09/07 09:09:38 by namak            ###   ########.fr       */
+/*   Updated: 2026/09/08 11:59:42 by zheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,14 @@ static int	add_num_to_stack(t_list **stack, char **argv, int i)
 static void	determine_and_proceed(t_flag *flags, t_list **stack,
 t_opt *opt, double disorder)
 {
+	t_list	*tmp;
+
 	if (flags->strat == 'a')
 	{
-		if (disorder < 0.2)
+		tmp = *stack;
+		if (ft_lstsize(tmp) <= 5)
+			simple_sort(flags, stack, opt);
+		else if (disorder < 0.2)
 			simple_sort(flags, stack, opt);
 		else if (disorder < 0.7)
 			medium_sort(flags, stack, opt);

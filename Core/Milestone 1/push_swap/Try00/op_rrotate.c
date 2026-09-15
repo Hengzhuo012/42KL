@@ -34,8 +34,7 @@ void	rra(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	reverse_rotate(a);
 	if (flags->bench)
 		opt->rra++;
-	else
-		write(1, "rra\n", 4);
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -44,8 +43,7 @@ void	rrb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	reverse_rotate(b);
 	if (flags->bench)
 		opt->rrb++;
-	else
-		write(1, "rrb\n", 4);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -54,28 +52,5 @@ void	rrr(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	reverse_rotate(b);
 	if (flags->bench)
 		opt->rrr++;
-	else
-		write(1, "rrr\n", 4);
-}
-
-/*
-void	rra(t_list **a)
-{
-
-	reverse_rotate(a);
-	write(1, "rra\n", 4);
-}
-
-void	rrb(t_list **b)
-{
-	reverse_rotate(b);
-	write(1, "rrb\n", 4);
-}
-
-void	rrr(t_list **a, t_list **b)
-{
-	reverse_rotate(a);
-	reverse_rotate(b);
 	write(1, "rrr\n", 4);
 }
-*/

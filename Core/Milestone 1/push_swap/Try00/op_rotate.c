@@ -32,8 +32,7 @@ void	ra(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	rotate(a);
 	if (flags->bench)
 		opt->ra++;
-	else
-		write(1, "ra\n", 3);
+	write(1, "ra\n", 3);
 }
 
 void	rb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -42,8 +41,7 @@ void	rb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	rotate(b);
 	if (flags->bench)
 		opt->rb++;
-	else
-		write(1, "rb\n", 3);
+	write(1, "rb\n", 3);
 }
 
 void	rr(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -52,27 +50,5 @@ void	rr(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	rotate(a);
 	if (flags->bench)
 		opt->rr++;
-	else
-		write(1, "rr\n", 3);
-}
-
-/*
-void	ra(t_list **a)
-{
-	rotate(a);
-	write(1, "ra\n", 3);
-}
-
-void	rb(t_list **b)
-{
-	rotate(b);
-	write(1, "rb\n", 3);
-}
-
-void	rr(t_list **a, t_list **b)
-{
-	rotate(a);
-	rotate(b);
 	write(1, "rr\n", 3);
 }
-*/

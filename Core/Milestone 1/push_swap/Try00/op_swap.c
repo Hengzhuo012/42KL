@@ -32,8 +32,7 @@ void	sa(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	swap(a);
 	if (flags->bench)
 		opt->sa++;
-	else
-		write(1, "sa\n", 3);
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -42,8 +41,7 @@ void	sb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	swap(b);
 	if (flags->bench)
 		opt->sb++;
-	else
-		write(1, "sb\n", 3);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -52,27 +50,5 @@ void	ss(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	swap(b);
 	if (flags->bench)
 		opt->ss++;
-	else
-		write(1, "ss\n", 3);
-}
-
-/*
-void	sa(t_list **a)
-{
-	swap(a);
-	write(1, "sa\n", 3);
-}
-
-void	sb(t_list **b)
-{
-	swap(b);
-	write(1, "sb\n", 3);
-}
-
-void	ss(t_list **a, t_list **b)
-{
-	swap (a);
-	swap (b);
 	write(1, "ss\n", 3);
 }
-*/

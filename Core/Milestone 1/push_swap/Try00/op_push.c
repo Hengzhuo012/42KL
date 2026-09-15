@@ -24,8 +24,7 @@ void	pa(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	*a = first;
 	if (flags->bench)
 		opt->pa++;
-	else
-		write(1, "pa\n", 3);
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
@@ -40,6 +39,5 @@ void	pb(t_list **a, t_list **b, t_flag *flags, t_opt *opt)
 	*b = first;
 	if (flags->bench)
 		opt->pb++;
-	else
-		write(1, "pb\n", 3);
+	write(1, "pb\n", 3);
 }
