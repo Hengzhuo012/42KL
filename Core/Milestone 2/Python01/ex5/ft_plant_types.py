@@ -92,7 +92,6 @@ class Vegetable(Plant):
     def age(self):
         self.nutritional_value += 1
         self._age += 1
-        self.grow()
 
 
 def ft_plant_types():
@@ -116,6 +115,7 @@ def ft_plant_types():
     print("[make tomato grow and age for 20 days]")
     for _ in range(20):
         vege_1.age()
+        vege_1.grow()
     vege_1.show()
 
 

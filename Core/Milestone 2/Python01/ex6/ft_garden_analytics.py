@@ -1,9 +1,9 @@
 class Plant:
     class Count:
         def __init__(self):
-            self.grow_count: int = 0
-            self.age_count: int = 0
-            self.show_count: int = 0
+            self.grow_count = 0
+            self.age_count = 0
+            self.show_count = 0
 
     def __init__(self, name: str, height: float, age: int):
         self.name = name
