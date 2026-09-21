@@ -8,10 +8,10 @@ class Plant:
         print(f'{self.name}: {self.get_height():.1f}cm, '
               f'{self.get_age()} days old')
 
-    def grow(self):
-        self._height += 0.8
+    def grow(self, growth: float):
+        self._height += growth
 
-    def aged(self):
+    def age(self):
         self._age += 1
 
     def set_height(self, height: float):

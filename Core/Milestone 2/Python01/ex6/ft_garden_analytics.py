@@ -16,8 +16,8 @@ class Plant:
               f'{self.get_age()} days old')
         self.count.show_count += 1
 
-    def grow(self):
-        self._height += 0.8
+    def grow(self, growth: float):
+        self._height += growth
         self.count.grow_count += 1
 
     def age(self):
@@ -52,7 +52,7 @@ class Plant:
 
     @classmethod
     def create_plant(cls):
-        return cls("Unknown", 0.0, 0)
+        return cls("Unknown plant", 0.0, 0)
 
     def show_stats(self):
         print(f'Stats: {self.count.grow_count} grow, '
@@ -67,21 +67,15 @@ class Flower(Plant):
         self.is_bloom = False
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
+        super().show()
         print(f' Color: {self.color}')
         if self.is_bloom:
             print(f' {self.name} is blooming beautifully!')
         else:
             print(f' {self.name} has not bloomed yet')
-        self.count.show_count += 1
 
     def bloom(self):
         self.is_bloom = True
-
-    def grow(self):
-        self._height += 8
-        self.count.grow_count += 1
 
 
 class Tree(Plant):
@@ -92,10 +86,8 @@ class Tree(Plant):
         self.shade_count = 0
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
+        super().show()
         print(f' Trunk diameter: {self.trunk_diameter:.1f}cm')
-        self.count.show_count += 1
 
     def produce_shade(self):
         print(f'Tree {self.name} now produces a shade of '
@@ -104,10 +96,8 @@ class Tree(Plant):
         self.shade_count += 1
 
     def show_stats(self):
-        print(f'Stats: {self.count.grow_count} grow, '
-              f'{self.count.age_count} age, '
-              f'{self.count.show_count} show')
-        print(f'{self.shade_count} shade')
+        super().show_stats()
+        print(f' {self.shade_count} shade')
 
 
 class Vegetable(Plant):
@@ -118,20 +108,13 @@ class Vegetable(Plant):
         self.nutritional_value = nutritional_value
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
+        super().show()
         print(f' Harvest season: {self.harvest_season}')
         print(f' Nutritional value: {self.nutritional_value}')
-        self.count.show_count += 1
-
-    def grow(self):
-        self._height += 2.1
-        self.count.grow_count += 1
 
     def age(self):
+        super().age()
         self.nutritional_value += 1
-        self._age += 1
-        self.count.age_count += 1
 
 
 class Seed(Flower):
@@ -144,19 +127,8 @@ class Seed(Flower):
             self.number_of_seeds = 42
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
-        print(f' Color: {self.color}')
-        if self.is_bloom:
-            print(f' {self.name} is blooming beautifully!')
-        else:
-            print(f' {self.name} has not bloomed yet')
+        super().show()
         print(f' Seeds: {self.number_of_seeds}')
-        self.count.show_count += 1
-
-    def grow(self):
-        self._height += 30
-        self.count.grow_count += 1
 
     def age(self):
         self._age += 20
@@ -164,7 +136,7 @@ class Seed(Flower):
 
 
 def display_plant_stats(plant: Plant) -> None:
-    print(f"[statistics for {plant.name}]")
+    print(f"[statistic for {plant.name}]")
     plant.show_stats()
 
 
@@ -181,7 +153,7 @@ def ft_garden_analytics():
     flower_1.show()
     display_plant_stats(flower_1)
     print("[asking the rose to grow and bloom]")
-    flower_1.grow()
+    flower_1.grow(8)
     flower_1.bloom()
     flower_1.show()
     display_plant_stats(flower_1)
@@ -200,7 +172,7 @@ def ft_garden_analytics():
     seed_1 = Seed("Sunflower", 80, 45, "yellow")
     seed_1.show()
     print("[make sunflower grow, age and bloom]")
-    seed_1.grow()
+    seed_1.grow(30)
     seed_1.age()
     seed_1.bloom()
     seed_1.seeds()

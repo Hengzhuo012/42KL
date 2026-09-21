@@ -8,8 +8,8 @@ class Plant:
         print(f'{self.name}: {self.get_height():.1f}cm, '
               f'{self.get_age()} days old')
 
-    def grow(self):
-        self._height += 0.8
+    def grow(self, growth: float):
+        self._height += growth
 
     def age(self):
         self._age += 1
@@ -44,8 +44,7 @@ class Flower(Plant):
         self.is_bloom = False
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
+        super().show()
         print(f' Color: {self.color}')
         if self.is_bloom:
             print(f' {self.name} is blooming beautifully!')
@@ -63,8 +62,7 @@ class Tree(Plant):
         self.trunk_diameter = trunk_diameter
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
+        super().show()
         print(f' Trunk diameter: {self.trunk_diameter:.1f}cm')
 
     def produce_shade(self):
@@ -81,17 +79,13 @@ class Vegetable(Plant):
         self.nutritional_value = nutritional_value
 
     def show(self):
-        print(f'{self.name}: {self.get_height():.1f}cm, '
-              f'{self.get_age()} days old')
+        super().show()
         print(f' Harvest season: {self.harvest_season}')
         print(f' Nutritional value: {self.nutritional_value}')
 
-    def grow(self):
-        self._height += 2.1
-
     def age(self):
+        super().age()
         self.nutritional_value += 1
-        self._age += 1
 
 
 def ft_plant_types():
@@ -115,7 +109,7 @@ def ft_plant_types():
     print("[make tomato grow and age for 20 days]")
     for _ in range(20):
         vege_1.age()
-        vege_1.grow()
+        vege_1.grow(2.1)
     vege_1.show()
 
 

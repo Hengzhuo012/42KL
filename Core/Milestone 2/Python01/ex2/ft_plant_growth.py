@@ -1,17 +1,17 @@
 class Plant:
-    def __init__(self, name: str, height: float, age: int):
+    def __init__(self, name: str, height: float, days: int):
         self.name = name
         self.height = height
-        self.age = age
+        self.days = days
 
     def show(self):
-        print(f'{self.name}: {self.height:.1f}cm, {self.age} days old')
+        print(f'{self.name}: {self.height:.1f}cm, {self.days} days old')
 
-    def grow(self):
-        self.height += 0.8
+    def grow(self, growth: float):
+        self.height += growth
 
-    def aged(self):
-        self.age += 1
+    def age(self):
+        self.days += 1
 
 
 def ft_plant_growth():
@@ -20,8 +20,8 @@ def ft_plant_growth():
     growth = plant.height
     plant.show()
     for i in range(1, 8, 1):
-        plant.grow()
-        plant.aged()
+        plant.grow(0.8)
+        plant.age()
         print(f'=== Day {i} ===')
         plant.show()
     growth = plant.height - growth
