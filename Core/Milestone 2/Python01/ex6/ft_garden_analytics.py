@@ -1,44 +1,66 @@
 class Plant:
     class Count:
         def __init__(self):
-            self.grow_count = 0
-            self.age_count = 0
-            self.show_count = 0
+            self._grow_count = 0
+            self._age_count = 0
+            self._show_count = 0
+
+        def increment_grow_count(self):
+            self._grow_count += 1
+
+        def increment_age_count(self):
+            self._age_count += 1
+
+        def increment_show_count(self):
+            self._show_count += 1
+
+        def get_grow_count(self):
+            return self._grow_count
+
+        def get_age_count(self):
+            return self._age_count
+
+        def get_show_count(self):
+            return self._show_count
 
     def __init__(self, name: str, height: float, age: int):
         self.name = name
-        self._height: float = height
-        self._age = age
+        self._height = 0.0
+        self._age = 0
+        self.set_height(height, False)
+        self.set_age(age, False)
         self.count: Plant.Count = self.Count()
 
     def show(self):
         print(f'{self.name}: {self.get_height():.1f}cm, '
               f'{self.get_age()} days old')
-        self.count.show_count += 1
+        self.count.increment_show_count()
 
     def grow(self, growth: float):
         self._height += growth
-        self.count.grow_count += 1
+        self.count.increment_grow_count()
 
     def age(self):
         self._age += 1
-        self.count.age_count += 1
+        self.count.increment_age_count()
 
-    def set_height(self, height: float):
+    def set_height(self, height: float, announce: bool = True):
         if (height < 0):
             print(f'{self.name}: Error, height can\'t be negative')
             print("Height update rejected")
         else:
             self._height = height
-            print(f'Height updated: {self.get_height():.0f}cm')
+            if announce:
+                print(f'Height updated: {self.get_height():.0f}cm')
 
-    def set_age(self, age: int):
+    def set_age(self, age: int, announce: bool = True):
         if (age < 0):
             print(f'{self.name}: Error, age can\'t be negative')
             print("Age update rejected")
         else:
             self._age = age
-            print(f'Age updated: {self.get_age()} days')
+            if announce:
+                print(f'Age updated: {self.get_age()} days')
 
     def get_height(self) -> float:
         return (self._height)
@@ -55,9 +77,9 @@ class Plant:
         return cls("Unknown plant", 0.0, 0)
 
     def show_stats(self):
-        print(f'Stats: {self.count.grow_count} grow, '
-              f'{self.count.age_count} age, '
-              f'{self.count.show_count} show')
+        print(f'Stats: {self.count.get_grow_count()} grow, '
+              f'{self.count.get_age_count()} age, '
+              f'{self.count.get_show_count()} show')
 
 
 class Flower(Plant):
@@ -83,21 +105,27 @@ class Tree(Plant):
                  trunk_diameter: int):
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
-        self.shade_count = 0
+        self._shade_count = 0
 
     def show(self):
         super().show()
         print(f' Trunk diameter: {self.trunk_diameter:.1f}cm')
 
+    def increment_shade(self):
+        self._shade_count += 1
+
+    def get_shade_count(self):
+        return self._shade_count
+
     def produce_shade(self):
         print(f'Tree {self.name} now produces a shade of '
-              f'{self._height:.1f}cm long and '
+              f'{self.get_height():.1f}cm long and '
               f'{self.trunk_diameter:.1f}cm wide.')
-        self.shade_count += 1
+        self.increment_shade()
 
     def show_stats(self):
         super().show_stats()
-        print(f' {self.shade_count} shade')
+        print(f' {self.get_shade_count()} shade')
 
 
 class Vegetable(Plant):
@@ -132,7 +160,7 @@ class Seed(Flower):
 
     def age(self):
         self._age += 20
-        self.count.age_count += 1
+        self.count.increment_age_count()
 
 
 def display_plant_stats(plant: Plant) -> None:
