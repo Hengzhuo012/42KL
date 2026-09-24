@@ -13,6 +13,7 @@ def open_file(file_name: str, mode: str) -> typing.IO[str] | None:
         return file_handle
     except OSError as e:
         print(f"Error opening file '{file_name}': {e}")
+        return None
 
 
 def read_file(file_handle: typing.IO[str]) -> str:

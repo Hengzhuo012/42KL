@@ -14,6 +14,7 @@ def open_file(file_name: str, mode: str) -> typing.IO[str] | None:
     except OSError as e:
         print(f"[STDERR] Error opening file '{file_name}': {e}",
               file=sys.stderr)
+        return None
 
 
 def read_file(file_handle: typing.IO[str]) -> str:

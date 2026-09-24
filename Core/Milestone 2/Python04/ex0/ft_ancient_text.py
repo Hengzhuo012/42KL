@@ -11,7 +11,7 @@ def read_file(file_handle: typing.IO[str]) -> str:
     return file_handle.read()
 
 
-def ft_acient_text():
+def ft_ancient_text():
     file_name = ""
     try:
         if len(sys.argv) != 2:
@@ -36,4 +36,4 @@ def ft_acient_text():
 
 
 if __name__ == "__main__":
-    ft_acient_text()
+    ft_ancient_text()
