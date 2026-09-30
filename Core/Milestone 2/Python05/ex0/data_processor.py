@@ -142,7 +142,7 @@ def test_log_processor():
         print(f" Log entry {i}: {value}")
 
 
-def data_processor():
+def test_data_processor():
     print("=== Code Nexus - Data Processor ===")
     print("")
     test_numeric_processor()
@@ -153,4 +153,4 @@ def data_processor():
 
 
 if __name__ == "__main__":
-    data_processor()
+    test_data_processor()
