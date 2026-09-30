@@ -7,24 +7,23 @@ class SyntaxError(Exception):
 
 
 def check_input_is_float(str_input: str) -> tuple[float, float, float] | None:
-    coord = ""
+    coord_text = ""
     try:
         temp_list: list[float] = []
         string_list = str_input.split(",")
         if len(string_list) != 3:
             raise SyntaxError()
 
-        for coord in string_list:
-            coord = coord.strip()
-            coord = float(coord)
-            temp_list.append(coord)
+        for coord_text in string_list:
+            coord_value = float(coord_text.strip())
+            temp_list.append(coord_value)
         return temp_list[0], temp_list[1], temp_list[2]
 
     except SyntaxError:
         print("Invalid Syntax")
         return None
     except ValueError as e:
-        print(f"Error on parameter '{coord}': {e}")
+        print(f"Error on parameter '{coord_text}': {e}")
         return None
 
 

@@ -18,24 +18,22 @@ def check_key(keys: list[str], key_to_check: str) -> bool:
     return True
 
 
-def set_inventory():
+def set_inventory() -> dict[str, int]:
     inv: dict[str, int] = {}
     for arg in sys.argv[1:]:
+        item = arg.split(":")
+        key = item[0]
         try:
-            item = arg.split(":")
             if len(item) != 2:
                 raise Error()
-            else:
-                key = item[0]
-                value = int(item[1])
-                if not check_key(list(inv.keys()), key):
-                    raise Redundant(key)
-                else:
-                    inv[key] = value
+            value = int(item[1])
+            if not check_key(list(inv.keys()), key):
+                raise Redundant(key)
+            inv[key] = value
         except Error:
-            print(f"Error - invalid parameter '{item[0]}'")
-        except Redundant as key:
-            print(f"Redundant item '{key}' - discarding")
+            print(f"Error - invalid parameter '{arg}'")
+        except Redundant as redundant_item:
+            print(f"Redundant item '{redundant_item}' - discarding")
         except ValueError as e:
             print(f"Quantity error for '{key}': {e}")
     return inv

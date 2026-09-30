@@ -19,7 +19,7 @@ def consume_event(event_list: list[tuple[str, str]]) \
         yield one_event
 
 
-def ft_data_stream():
+def ft_data_stream() -> None:
     event = gen_event()
     print("=== Game Data Stream Processor ===")
     for i in range(1000):

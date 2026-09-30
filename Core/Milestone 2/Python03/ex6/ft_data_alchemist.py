@@ -15,7 +15,7 @@ def ft_data_alchemist():
     print(f"Mew list of capitalized names only: {already_capitalized}")
     print("")
 
-    players_dict = {player: random.randint(0, 1000) 
+    players_dict = {player: random.randint(0, 1000)
                     for player in capitalized_players_list}
     print(f"Score dict: {players_dict}")
     scores_list = list(players_dict.values())

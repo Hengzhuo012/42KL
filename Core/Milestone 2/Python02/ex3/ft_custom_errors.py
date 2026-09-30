@@ -35,7 +35,8 @@ def ft_custom_errors():
     print("")
 
     print("Testing catching all garden errors...")
-    for msg in ["The tomato plant is wilting!", "Not enough water in the tank!"]:
+    for msg in ["The tomato plant is wilting!",
+                "Not enough water in the tank!"]:
         try:
             if msg == "The tomato plant is wilting!":
                 raise PlantError(msg)

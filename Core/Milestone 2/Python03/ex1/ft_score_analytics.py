@@ -8,7 +8,7 @@ def convert_str_to_int(string: str):
         print(f"Invalid parameter: '{string}'")
 
 
-def ft_score_analytics():
+def ft_score_analytics() -> None:
     print("=== Player Score Analytics ===")
     size = len(sys.argv)
     scores_list: list[int] = []
