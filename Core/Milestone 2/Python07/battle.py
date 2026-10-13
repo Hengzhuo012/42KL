@@ -1,0 +1,30 @@
+import ex0
+
+if __name__ == "__main__":
+    print("Testing factory")
+    flame_factory = ex0.FlameFactory()
+    flameling = flame_factory.create_base()
+    print(f"{flameling.describe()}")
+    print(f"{flameling.attack()}")
+    pyrodon = flame_factory.create_evolved()
+    print(f"{pyrodon.describe()}")
+    print(f"{pyrodon.attack()}")
+    print("")
+
+    print("Testing factory")
+    aqua_factory = ex0.AquaFactory()
+    aquabub = aqua_factory.create_base()
+    print(f"{aquabub.describe()}")
+    print(f"{aquabub.attack()}")
+    torragon = aqua_factory.create_evolved()
+    print(f"{torragon.describe()}")
+    print(f"{torragon.attack()}")
+    print("")
+
+    print("Testing battle")
+    print(f"{flameling.describe()}")
+    print(" vs.")
+    print(f"{aquabub.describe()}")
+    print(" fight!")
+    print(f"{flameling.attack()}")
+    print(f"{aquabub.attack()}")

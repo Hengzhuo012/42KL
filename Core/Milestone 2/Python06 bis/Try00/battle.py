@@ -1,0 +1,30 @@
+import ex3
+
+if __name__ == "__main__":
+    print("Testing factory")
+    flame_factory = ex3.FlameFactory()
+    flameling = flame_factory.create_base()
+    print(f"{flameling.describe()}")
+    print(f"{flameling.attack()}")
+    pyrodon = flame_factory.create_evolved()
+    print(f"{pyrodon.describe()}")
+    print(f"{pyrodon.attack()}")
+    print("")
+
+    print("Testing factory")
+    transform_creature_factory = ex3.TransformCreatureFactory()
+    shiftling = transform_creature_factory.create_base()
+    print(f"{shiftling.describe()}")
+    print(f"{shiftling.attack()}")
+    morphagon = transform_creature_factory.create_evolved()
+    print(f"{morphagon.describe()}")
+    print(f"{morphagon.attack()}")
+    print("")
+
+    print("Testing battle")
+    print(f"{flameling.describe()}")
+    print(" vs.")
+    print(f"{shiftling.describe()}")
+    print(" fight!")
+    print(f"{flameling.attack()}")
+    print(f"{shiftling.attack()}")
