@@ -2,7 +2,10 @@ import ex3
 import ex4
 
 
-def format_opponent(factory, strategy) -> str:
+def format_opponent(
+    factory: ex3.CreatureFactory,
+    strategy: ex4.BattleStrategy,
+) -> str:
     entity = factory.create_base()
     entity_name = entity.__class__.__name__
     strategy_name = strategy.__class__.__name__.replace("Strategy", "")
@@ -25,10 +28,12 @@ def battle(
             print(f"{entity_b.describe()}")
             print(" now fight!")
 
-            for entity, strategy in ((entity_a, strategy_a), (entity_b, strategy_b)):
+            for entity, strategy in ((entity_a, strategy_a),
+                                     (entity_b, strategy_b)):
                 if not strategy.is_valid(entity):
                     raise ex4.StrategyError(
-                        f"Invalid Creature '{entity.__class__.__name__}' for this aggressive strategy"
+                        f"Invalid Creature '{entity.__class__.__name__}' "
+                        f"for this aggressive strategy"
                     )
                 for line in strategy.act(entity).splitlines():
                     print(line)
@@ -36,11 +41,12 @@ def battle(
 
 if __name__ == "__main__":
     print("Tournament 0 (basic)")
-    opponents = [
+    opponents: list[tuple[ex3.CreatureFactory, ex4.BattleStrategy]] = [
         (ex3.FlameFactory(), ex4.NormalStrategy()),
         (ex3.TransformCreatureFactory(), ex4.AggressiveStrategy()),
     ]
-    display = ", ".join(format_opponent(factory, strategy) for factory, strategy in opponents)
+    display = ", ".join(format_opponent(factory, strategy)
+                        for factory, strategy in opponents)
     print(f"[{display}]")
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")
@@ -53,7 +59,8 @@ if __name__ == "__main__":
         (ex3.TransformCreatureFactory(), ex4.AggressiveStrategy()),
         (ex3.FlameFactory(), ex4.AggressiveStrategy()),
     ]
-    display = ", ".join(format_opponent(factory, strategy) for factory, strategy in opponents)
+    display = ", ".join(format_opponent(factory, strategy)
+                        for factory, strategy in opponents)
     print(f"[{display}]")
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")

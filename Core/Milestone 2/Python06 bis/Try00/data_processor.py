@@ -86,23 +86,25 @@ class LogProcessor(DataProcessor):
         )
 
 
-def test_numeric_processor():
+def test_numeric_processor() -> None:
     print("Testing Numeric Processor...")
     num_processor = NumericProcessor()
-    num = 42
-    print(f" Trying to validate input '{num}': {num_processor.validate(num)}")
-    num = "Hello"
-    print(f" Trying to validate input '{num}': {num_processor.validate(num)}")
-    num = "foo"
-    print(f" Test invalid ingestion of string '{num}' "
+    numeric_value = 42
+    print(f" Trying to validate input '{numeric_value}': "
+          f"{num_processor.validate(numeric_value)}")
+    text_value = "Hello"
+    print(f" Trying to validate input '{text_value}': "
+          f"{num_processor.validate(text_value)}")
+    invalid_value = "foo"
+    print(f" Test invalid ingestion of string '{invalid_value}' "
           "without prior validation:")
     try:
-        num_processor.ingest(num)
+        num_processor.ingest(typing.cast(typing.Any, invalid_value))
     except ValidateError as error:
         print(f" Got exception: {error}")
-    num = [1, 2, 3, 4, 5]
-    print(f" Processing data: {num}")
-    num_processor.ingest(num)
+    values: list[int | float] = [1, 2, 3, 4, 5]
+    print(f" Processing data: {values}")
+    num_processor.ingest(values)
     n = 3
     print(f" Extracting {n} values...")
     for i in range(n):
@@ -110,15 +112,17 @@ def test_numeric_processor():
         print(f" Numeric value {i}: {value}")
 
 
-def test_text_processor():
+def test_text_processor() -> None:
     print("Testing Text Processor...")
     text_processor = TextProcessor()
-    text = 42
-    print(f" Trying to validate input '{text}': "
-          "{text_processor.validate(text)}")
-    text = ["Hello", "Nexus", "World"]
-    print(f" Processing data: {text}")
-    text_processor.ingest(text)
+    invalid_text = 42
+    print(
+        f" Trying to validate input '{invalid_text}': "
+        f"{text_processor.validate(invalid_text)}"
+    )
+    text_values = ["Hello", "Nexus", "World"]
+    print(f" Processing data: {text_values}")
+    text_processor.ingest(text_values)
     n = 1
     print(f" Extracting {n} values...")
     for i in range(n):
@@ -126,15 +130,18 @@ def test_text_processor():
         print(f" Text value {i}: {value}")
 
 
-def test_log_processor():
+def test_log_processor() -> None:
     print("Testing Log Processor...")
     log_processor = LogProcessor()
-    log = "Hello"
-    print(f" Trying to validate input '{log}': {log_processor.validate(log)}")
-    log = [{'log_level': 'NOTICE', 'log_message': 'Connection to server'},
-           {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]
-    print(f" Processing data: {log}")
-    log_processor.ingest(log)
+    invalid_log = "Hello"
+    print(f" Trying to validate input '{invalid_log}': "
+          f"{log_processor.validate(invalid_log)}")
+    log_entries = [
+        {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
+        {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'},
+    ]
+    print(f" Processing data: {log_entries}")
+    log_processor.ingest(log_entries)
     n = 2
     print(f" Extracting {n} values...")
     for i in range(n):
@@ -142,7 +149,7 @@ def test_log_processor():
         print(f" Log entry {i}: {value}")
 
 
-def test_data_processor():
+def test_data_processor() -> None:
     print("=== Code Nexus - Data Processor ===")
     print("")
     test_numeric_processor()
