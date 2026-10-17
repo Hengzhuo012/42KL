@@ -1,3 +1,5 @@
+import os
+import site
 import sys
 
 
@@ -6,13 +8,13 @@ if __name__ == "__main__":
         print("LABORATORY STATUS: The laboratory is sealed")
         print("")
         print(f"Current Python: {sys.executable}")
-        print(f"Virtual Environment: {sys.prefix}")
+        print(f"Virtual Environment: {os.path.basename(sys.prefix)}")
         print(f"Environment Path: {sys.prefix}")
         print("")
         print("SUCCESS: You are working in an isolated environment!")
         print("Safe to install reagents without affecting the global system.")
         print("")
-        print(f"Reagent installation path: {sys.path}")
+        print(f"Reagent installation path: {site.getsitepackages()[0]}")
     else:
         print("LABORATORY STATUS: You are working in the open")
         print("")
