@@ -1,19 +1,19 @@
 class GardenError(Exception):
-    "Basic error for garden problems"
-    pass
+    def __init__(self, message: str = "Unknown garden error") -> None:
+        super().__init__(message)
 
 
 class PlantError(GardenError):
-    "Problems with plants"
-    pass
+    def __init__(self, message: str = "Unknown plant error") -> None:
+        super().__init__(message)
 
 
 class WaterError(GardenError):
-    "Problems with watering"
-    pass
+    def __init__(self, message: str = "Unknown water error") -> None:
+        super().__init__(message)
 
 
-def ft_custom_errors():
+def ft_custom_errors() -> None:
     print("=== Custom Garden Errors Demo ===")
     print("")
     print("Testing PlantError...")
@@ -31,7 +31,7 @@ def ft_custom_errors():
         if msg == "Not enough water in the tank!":
             raise WaterError(msg)
     except WaterError as error:
-        print(f"Caught PlantError: {error}")
+        print(f"Caught WaterError: {error}")
     print("")
 
     print("Testing catching all garden errors...")
