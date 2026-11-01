@@ -1,23 +1,23 @@
 import sys
 
 
-def convert_str_to_int(string: str):
+def convert_str_to_int(string: str) -> int | None:
     try:
         return (int(string))
     except ValueError:
         print(f"Invalid parameter: '{string}'")
+        return None
 
 
 def ft_score_analytics() -> None:
     print("=== Player Score Analytics ===")
-    size = len(sys.argv)
     scores_list: list[int] = []
-    for i in range(size - 1):
-        score = convert_str_to_int(sys.argv[i + 1])
-        if score:
+    for argument in sys.argv[1:]:
+        score = convert_str_to_int(argument)
+        if score is not None:
             scores_list.append(score)
     if len(scores_list):
-        print(f"Scores proccessed: {scores_list}")
+        print(f"Scores processed: {scores_list}")
         print(f"Total players: {len(scores_list)}")
         print(f"Total score: {sum(scores_list)}")
         print(f"Average score: {sum(scores_list) / len(scores_list):.1f}")

@@ -22,9 +22,9 @@ def set_inventory() -> dict[str, int]:
     inv: dict[str, int] = {}
     for arg in sys.argv[1:]:
         item = arg.split(":")
-        key = item[0]
+        key = item[0].strip()
         try:
-            if len(item) != 2:
+            if len(item) != 2 or not key:
                 raise Error()
             value = int(item[1])
             if not check_key(list(inv.keys()), key):
@@ -39,7 +39,7 @@ def set_inventory() -> dict[str, int]:
     return inv
 
 
-def ft_inventory_system():
+def ft_inventory_system() -> None:
     print("=== Inventory System Analysis ===")
     inv = set_inventory()
     print(f"Got inventory: {inv}")
@@ -59,8 +59,12 @@ def ft_inventory_system():
         while index < len(values):
             item = keys[index]
             quantity = values[index]
-            percentage = round(quantity / total_quantity * 100, 1)
-            print(f"Item {item} represents {percentage}%")
+            if total_quantity == 0:
+                print(f"Item {item} percentage unavailable """
+                      f"(total quantity is 0)")
+            else:
+                percentage = round(quantity / total_quantity * 100, 1)
+                print(f"Item {item} represents {percentage}%")
             if quantity > values[biggest_index]:
                 biggest_index = index
             if quantity < values[smallest_index]:
@@ -72,7 +76,12 @@ def ft_inventory_system():
         print(f"Item least abundant: {keys[smallest_index]} "
               f"with quantity {values[smallest_index]}")
 
-    inv.update({"magic_item": 1})
+    new_item = "magic_item"
+    suffix = 1
+    while new_item in inv.keys():
+        new_item = f"magic_item_{suffix}"
+        suffix += 1
+    inv.update({new_item: 1})
     print(f"Updated inventory: {inv}")
 
 

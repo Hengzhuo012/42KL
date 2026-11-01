@@ -1,11 +1,6 @@
 import math
 
 
-class SyntaxError(Exception):
-    "Invalid syntax"
-    pass
-
-
 def check_input_is_float(str_input: str) -> tuple[float, float, float] | None:
     coord_text = ""
     try:
@@ -18,7 +13,6 @@ def check_input_is_float(str_input: str) -> tuple[float, float, float] | None:
             coord_value = float(coord_text.strip())
             temp_list.append(coord_value)
         return temp_list[0], temp_list[1], temp_list[2]
-
     except SyntaxError:
         print("Invalid Syntax")
         return None
@@ -42,7 +36,7 @@ def distance_between_two_points(coord1: tuple[float, float, float],
                      (coord1[2] - coord2[2])**2)
 
 
-def ft_coordinate_system():
+def ft_coordinate_system() -> None:
     print("=== Game Coordinate System ===")
     print("")
     print("Get a first set of coordinates")

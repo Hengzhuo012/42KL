@@ -11,7 +11,7 @@ def gen_player_achievements() -> set[str]:
     return result
 
 
-def ft_achievement_tracker():
+def ft_achievement_tracker() -> None:
     print("=== Achievement Tracker System ===")
     print("")
 
@@ -38,7 +38,7 @@ def ft_achievement_tracker():
 
     print(f"Alice is missing: {(bob.union(charlie, dylan).difference(alice))}")
     print(f"Bob is missing: {alice.union(charlie, dylan).difference(bob)}")
-    print(f"Charile is missing: {alice.union(bob, dylan).difference(charlie)}")
+    print(f"Charlie is missing: {alice.union(bob, dylan).difference(charlie)}")
     print(f"Dylan is missing: {alice.union(bob, charlie).difference(dylan)}")
 
 
