@@ -20,7 +20,7 @@ def read_file(file_handle: typing.IO[str]) -> str:
     return file_handle.read()
 
 
-def display_text(text: str):
+def display_text(text: str) -> None:
     print("---\n")
     print(text)
     print("\n---")
@@ -49,7 +49,7 @@ def add_hashtag_to_lines(text: str) -> str:
     return result
 
 
-def ft_archive_creation():
+def ft_archive_creation() -> None:
     try:
         if len(sys.argv) != 2:
             raise UsageError()
