@@ -21,9 +21,13 @@ def read_file(file_handle: typing.IO[str]) -> str:
 
 
 def display_text(text: str) -> None:
-    print("---\n")
-    print(text)
-    print("\n---")
+    print("---")
+    print()
+    print(text, end="")
+    if not text.endswith("\n"):
+        print()
+    print()
+    print("---")
 
 
 def write_file(text: str, file_name: str, file_handle: typing.IO[str]) -> None:
@@ -45,7 +49,8 @@ def add_hashtag_to_lines(text: str) -> str:
         if char == "\n":
             result += "#"
         result += char
-    result += "#"
+    if text and text[-1] != "\n":
+        result += "#"
     return result
 
 
@@ -60,9 +65,14 @@ def ft_archive_creation() -> None:
         file_handle = open_file(file_name, 'r')
         if file_handle is None:
             return
-        text = read_file(file_handle)
+        try:
+            text = read_file(file_handle)
+        except OSError as error:
+            print(f"Error reading file: {error}")
+            return
+        finally:
+            close_file(file_handle)
         display_text(text)
-        close_file(file_handle)
         print(f"File '{file_name}' closed.")
         print("")
 
@@ -75,14 +85,15 @@ def ft_archive_creation() -> None:
         if new_file_name == "":
             print("Not saving data.")
             return
+        print(f"Saving data to '{new_file_name}'")
         new_file_handle = open_file(new_file_name, 'w')
         if new_file_handle is None:
+            print("Not saving data.")
             return
-        print(f"Saving data to '{new_file_name}'")
         write_file(text, new_file_name, new_file_handle)
         close_file(new_file_handle)
     except UsageError:
-        print("Usage: ft_ancient_text.py <file>")
+        print("Usage: ft_archive_creation.py <file>")
 
 
 if __name__ == "__main__":

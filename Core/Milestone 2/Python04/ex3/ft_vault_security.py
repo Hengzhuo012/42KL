@@ -1,6 +1,13 @@
+class ModeError(Exception):
+    "Invalid mode to openfile"
+    pass
+
+
 def secure_archive(file_name: str, mode: str = 'r', text: str = "") \
  -> tuple[bool, str]:
     try:
+        if (mode != 'r' and mode != 'w'):
+            raise ModeError(f"Invalid mode: {mode}")
         with open(file_name, mode) as file_handle:
             if mode == "r":
                 return True, file_handle.read()
@@ -9,11 +16,13 @@ def secure_archive(file_name: str, mode: str = 'r', text: str = "") \
                 return True, "Content successfully written to file"
             else:
                 return False, "Invalid mode"
+    except ModeError as e:
+        return False, f"{e}"
     except OSError as e:
         return False, f"{e}"
 
 
-def ft_vault_security():
+def ft_vault_security() -> None:
     print("=== Cyber Archives Security ===")
     print("")
 
