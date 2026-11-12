@@ -1,0 +1,12 @@
+import alchemy
+
+
+if __name__ == "__main__":
+    print("=== Alembic 1 ===")
+    print("Accessing the alchemy module using 'import alchemy'")
+    print(f"Testing create_air: {alchemy.create_air()}")
+    print("Now show that not all functions can be reached")
+    try:
+        getattr(alchemy, "create_earth")()
+    except AttributeError as exc:
+        print(f"Hidden function unavailable: {exc}")

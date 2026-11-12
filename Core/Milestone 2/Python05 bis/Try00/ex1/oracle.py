@@ -8,32 +8,20 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ENV_FILE = os.path.join(BASE_DIR, ".env")
 
 
-def load_environment():
+def load_environment() -> None:
     if os.path.exists(ENV_FILE):
         dotenv.load_dotenv(ENV_FILE)
 
 
-def safe_env(name, default=None):
+def safe_env(name: str, default: str | None = None) -> str | None:
     value = os.getenv(name)
-    if value is None or str(value).strip() == "":
+    if value is None or value.strip() == "":
         return default
     return value
 
 
-def mode_is_development():
-    mode = safe_env("MATRIX_MODE", "development")
-    return str(mode).strip().lower() == "development"
-
-
-def print_security_check():
-    print("Configuration security check:")
-    print("[OK] No hardcoded secrets detected")
-    print("[OK] .env file properly ignored by git")
-    print("[OK] Production overrides available")
-
-
-def normalize_log_level(value, default="DEBUG"):
-    text = str(value or default).strip().upper()
+def normalize_log_level(value: str | None, default: str = "DEBUG") -> str:
+    text = (value or default).strip().upper()
 
     if text.isdigit():
         mapping = {
@@ -47,65 +35,79 @@ def normalize_log_level(value, default="DEBUG"):
     return text if text else default.upper()
 
 
-def print_development_config():
+def print_security_guidance() -> None:
+    print("Configuration security:")
+    print("[OK] Secrets are read from environment variables")
+    print("[OK] Keep .env local; commit only placeholder values")
+    print("[OK] Production overrides are supported")
+
+
+def print_development_config() -> None:
     print("Mode: development")
     print("Database: Connected to local instance")
 
-    api_key = safe_env("API_KEY")
-    if api_key:
+    if safe_env("API_KEY"):
         print("API Access: Authenticated")
     else:
         print("API Access: Not authenticated")
 
-    log_level = normalize_log_level(safe_env("LOG_LEVEL", "DEBUG"), "DEBUG")
+    log_level = normalize_log_level(safe_env("LOG_LEVEL"), "DEBUG")
     print(f"Log Level: {log_level}")
-    print(f"Remote Network: {safe_env('REMOTE_NETWORK', 'Online')}")
+    endpoint = safe_env("ZION_ENDPOINT")
+    network = "Configured" if endpoint else "Online (default)"
+    print(f"Remote Network: {network}")
 
 
-def print_production_config():
+def print_production_config() -> None:
     print("Mode: production")
-    database = safe_env("DATABASE_URL")
-    if database:
-        print(f"Database: Connected to production instance ({database})")
+    if safe_env("DATABASE_URL"):
+        print("Database: Connected to production instance")
     else:
         print("Database: Production database unavailable")
 
-    api_key = safe_env("API_KEY")
-    if api_key:
+    if safe_env("API_KEY"):
         print("API Access: Authenticated")
     else:
         print("API Access: Missing production credentials")
 
-    log_level = normalize_log_level(safe_env("LOG_LEVEL", "INFO"), "INFO")
+    log_level = normalize_log_level(safe_env("LOG_LEVEL"), "INFO")
     print(f"Log Level: {log_level}")
-    print(f"Remote Network: {safe_env('REMOTE_NETWORK', 'Restricted')}")
+    endpoint = safe_env("ZION_ENDPOINT")
+    network = "Configured" if endpoint else "Restricted (default)"
+    print(f"Remote Network: {network}")
 
 
-def main():
+def print_missing_configuration(mode: str) -> None:
+    required = ["API_KEY", "ZION_ENDPOINT"]
+    if mode == "production":
+        required.append("DATABASE_URL")
+
+    missing = [name for name in required if not safe_env(name)]
+    if missing:
+        print(f"WARNING: Missing configuration: {', '.join(missing)}")
+
+
+def main() -> None:
     load_environment()
     print("ORACLE STATUS: Consulting the configuration...")
-    print("")
+    print()
     print("Configuration loaded:")
 
-    mode = safe_env("MATRIX_MODE", "development")
-    mode_value = str(mode).strip().lower()
+    mode = (safe_env("MATRIX_MODE", "development") or "development")
+    mode_value = mode.strip().lower()
+    if mode_value not in ("development", "production"):
+        print(f"WARNING: Unknown MATRIX_MODE '{mode}'; using development")
+        mode_value = "development"
 
     if mode_value == "production":
         print_production_config()
     else:
-        # Invalid or missing values fall back to development mode safely.
-        if mode_value not in ("development", "production"):
-            print("Mode: development")
-            print("Database: Connected to local instance")
-            print("API Access: Not authenticated")
-            print("Log Level: DEBUG")
-            print("Remote Network: Online")
-        else:
-            print_development_config()
+        print_development_config()
 
-    print("")
-    print_security_check()
-    print("")
+    print_missing_configuration(mode_value)
+    print()
+    print_security_guidance()
+    print()
     print("The Oracle sees all configurations")
 
 
@@ -113,15 +115,17 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:
-        print("Configuration warning: unable to load settings cleanly.", file=sys.stderr)
+        print("Configuration warning: unable to load settings cleanly.",
+              file=sys.stderr)
         print(f"Reason: {exc}", file=sys.stderr)
         print("Falling back to local development defaults.")
         print("Mode: development")
         print("Database: Connected to local instance")
         print("API Access: Not authenticated")
         print("Log Level: DEBUG")
-        print("Remote Network: Online")
-        print("")
-        print_security_check()
-        print("")
+        print("Remote Network: Online (default)")
+        print_missing_configuration("development")
+        print()
+        print_security_guidance()
+        print()
         print("The Oracle sees all configurations")

@@ -1,13 +1,13 @@
 import importlib
 
 
-REAGENTS = (
+REAGENTS: tuple[tuple[str, str], ...] = (
     ("pandas", "Data manipulation ready"),
     ("numpy", "Numerical computation ready"),
 )
 
 
-def main():
+def main() -> None:
     missing = []
 
     print("REAGENT STATUS: Loading reagents...")
@@ -27,9 +27,9 @@ def main():
     print("pip vs Poetry:")
     print("  requirements.txt declares what to install; "
           "pip resolves it at install time.")
-    print("  pyproject.toml declares the same constraints; "
-          "and Poetry pins the resolved versions in poetry.lock "
-          "so every install is identical.")
+        print("  pyproject.toml declares the same dependencies; "
+            "Poetry records resolved versions in poetry.lock. Commit that "
+            "lockfile for reproducible installs.")
 
     if missing:
         print()
