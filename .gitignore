@@ -1,0 +1,6 @@
+.venv
+__pycache__
+.mypy_cache
+old
+maze_analyzer.py
+output_maze*
