@@ -5,23 +5,26 @@ import time
 import random
 import subprocess
 from prompt import instruction
+from load_config import load_config
 
 
 def main() -> None:
+    config = load_config()
     prompt_status: bool = True
     loop_strategy: bool = True
     animate: bool = True
-    delay = 0.01
+    delay: float = 0.01
     seed: int = random.randint(0, 9999)
-    width: int = 50
-    height: int = 25
-    start: tuple[int, int] = (0, 0)
-    end: tuple[int, int] = ((width - 1), (height - 1))
-    perfect = False
     strategy: int = 0
-    stragety_list: list[str] = ["backtracking", 'hnk']
+    stragety_list: list[str] = ["backtracking", "hnk"]
     generator = MazeGenerator(
-        width, height, start, end, "output_maze.txt", seed, perfect
+        width=config.width,
+        height=config.height,
+        entry=config.entry,
+        end=config.exit,
+        output_file=config.output_file,
+        seed=seed,
+        perfect=config.perfect,
     )
 
     def my_draw(y: int, x: int) -> None:
@@ -31,13 +34,13 @@ def main() -> None:
 
     while True:
         generator = MazeGenerator(
-            width,
-            height,
-            start,
-            end,
-            "output_maze.txt",
-            seed,
-            perfect,
+            width=config.width,
+            height=config.height,
+            entry=config.entry,
+            end=config.end,
+            output_file=config.output_file,
+            seed=seed,
+            perfect=config.perfect,
             stragety=strategy,
         )
         print("\033[2J\033[H", end="")
@@ -60,7 +63,7 @@ def main() -> None:
             continue
         if prompt_status:
             seed, strategy, perfect = instruction(
-                generator, seed, strategy, perfect
+                generator, seed, strategy, config.perfect
             )
 
 
