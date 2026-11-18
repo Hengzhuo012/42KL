@@ -8,12 +8,12 @@ def instruction(
     maze: MazeGenerator, seed: int, strategy: int, perfect: bool
 ) -> tuple[int, int, bool]:
     print(f"\033[{maze.height * 2 + 9};1H\033[J", end="")
-    print(f"1. Seed number: {maze.seed} Enter '1' to change seed.")
+    print(f"1. Enter '1' to change seed.  Seed number: {maze.seed}")
     maze_type = "Perfect" if maze.perfect else "Imperfect"
-    print(f"2. Maze type: {maze_type} Enter '2' to change type.")
+    print(f"2. Enter '2' to change type. Maze type: {maze_type}")
     print("3. Press 3 to change wall's color")
     print("4. Press 4 to change 42's color")
-    print(f"5. Press 5 to change generator algo {maze.strategy}")
+    print(f"5. Press 5 to change generator. Current algo: {maze.strategy}")
     print("Press enter to generate same maze again")
     print("Enter '67' to generate random maze")
     print("Enter 'exit' to quit")
