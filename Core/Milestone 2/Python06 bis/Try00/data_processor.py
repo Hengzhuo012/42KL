@@ -1,5 +1,5 @@
 import abc
-import typing
+from typing import Any, cast
 
 
 class ValidateError(Exception):
@@ -13,11 +13,11 @@ class DataProcessor(abc.ABC):
         self._next_rank = 1
 
     @abc.abstractmethod
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         raise NotImplementedError
 
     @abc.abstractmethod
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: Any) -> None:
         raise NotImplementedError
 
     def output(self) -> tuple[int, str]:
@@ -33,7 +33,7 @@ class NumericProcessor(DataProcessor):
             self._data.append((self._next_rank, str(value)))
             self._next_rank += 1
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)):
             return True
         return isinstance(data, list) and all(
@@ -50,7 +50,7 @@ class TextProcessor(DataProcessor):
             self._data.append((self._next_rank, value))
             self._next_rank += 1
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
         return isinstance(data, list) and all(
@@ -70,7 +70,7 @@ class LogProcessor(DataProcessor):
             self._data.append((self._next_rank, formatted_value))
             self._next_rank += 1
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, dict):
             return all(
                 isinstance(key, str) and isinstance(value, str)
@@ -99,7 +99,7 @@ def test_numeric_processor() -> None:
     print(f" Test invalid ingestion of string '{invalid_value}' "
           "without prior validation:")
     try:
-        num_processor.ingest(typing.cast(typing.Any, invalid_value))
+        num_processor.ingest(cast(Any, invalid_value))
     except ValidateError as error:
         print(f" Got exception: {error}")
     values: list[int | float] = [1, 2, 3, 4, 5]

@@ -1,5 +1,5 @@
 import abc
-import typing
+from typing import Any, Protocol
 
 
 class ValidateError(Exception):
@@ -13,11 +13,11 @@ class DataProcessor(abc.ABC):
         self._next_rank = 1
 
     @abc.abstractmethod
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         raise NotImplementedError
 
     @abc.abstractmethod
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: Any) -> None:
         raise NotImplementedError
 
     def output(self) -> tuple[int, str]:
@@ -33,7 +33,7 @@ class NumericProcessor(DataProcessor):
             self._data.append((self._next_rank, str(value)))
             self._next_rank += 1
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)):
             return True
         return isinstance(data, list) and all(
@@ -50,7 +50,7 @@ class TextProcessor(DataProcessor):
             self._data.append((self._next_rank, value))
             self._next_rank += 1
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
         return isinstance(data, list) and all(
@@ -70,7 +70,7 @@ class LogProcessor(DataProcessor):
             self._data.append((self._next_rank, formatted_value))
             self._next_rank += 1
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, dict):
             return all(
                 isinstance(key, str) and isinstance(value, str)
@@ -86,7 +86,9 @@ class LogProcessor(DataProcessor):
         )
 
 
-class ExportPlugin(typing.Protocol):
+# Used Protocol instead of abc so that other classes doesn't required to be
+# inherit from this
+class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
 
@@ -141,7 +143,7 @@ class DataStream:
     def register_processor(self, proc: DataProcessor) -> None:
         self._processors.append(proc)
 
-    def process_stream(self, stream: list[typing.Any]) -> None:
+    def process_stream(self, stream: list[Any]) -> None:
         for element in stream:
             for processor in self._processors:
                 if processor.validate(element):

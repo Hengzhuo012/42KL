@@ -1,10 +1,10 @@
 import abc
-
 from ex3.creature import Creature, TransformCapability
 
 
 class StrategyError(Exception):
     """Raised when a strategy is used on an unsuitable entity."""
+    pass
 
 
 class BattleStrategy(abc.ABC):

@@ -47,7 +47,7 @@ if __name__ == "__main__":
     ]
     display = ", ".join(format_opponent(factory, strategy)
                         for factory, strategy in opponents)
-    print(f"[{display}]")
+    print(f"[ {display} ]")
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")
     print("")
@@ -61,11 +61,11 @@ if __name__ == "__main__":
     ]
     display = ", ".join(format_opponent(factory, strategy)
                         for factory, strategy in opponents)
-    print(f"[{display}]")
+    print(f"[ {display} ]")
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")
     print("* Battle *")
     try:
         battle(opponents)
-    except ex4.StrategyError as exc:
-        print(f"Battle error, aborting tournament: {exc}")
+    except ex4.StrategyError as error:
+        print(f"Battle error, aborting tournament: {error}")

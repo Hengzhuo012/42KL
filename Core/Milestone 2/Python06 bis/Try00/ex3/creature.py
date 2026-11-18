@@ -1,5 +1,5 @@
 import abc
-import typing
+from typing import Any
 
 
 class Creature(abc.ABC):
@@ -36,11 +36,11 @@ class TransformCapability(abc.ABC):
         self.transformed = transformed
 
     @abc.abstractmethod
-    def transform(self) -> typing.Any:
+    def transform(self) -> Any:
         pass
 
     @abc.abstractmethod
-    def revert(self) -> typing.Any:
+    def revert(self) -> Any:
         pass
 
 
