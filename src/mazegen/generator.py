@@ -121,6 +121,7 @@ class MazeGenerator:
                 path.append(candidate)
 
             while path and path[-1]:
+                
                 idx = self.rng.randrange(len(path[-1]))
                 item = path[-1].pop(idx)
                 cy, cx, ny, nx, nb, ob = item
@@ -195,6 +196,52 @@ class MazeGenerator:
                     y, x = ny, nx
                     if on_step is not None:
                         on_step(x, y)
+
+    def growing_tree(
+        self, on_step: Callable[[int, int], None] | None = None
+    ) -> None:
+        directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
+        path: list[list[tuple[int, int, int, int, int, int]]] = [[]]
+        x: int = self.rng.randint(0, self.width - 1)
+        y: int = self.rng.randint(0, self.height - 1)
+        if (y, x) in self.cells_42:
+            x = round(self.width / 2 - 1)
+            y = math.ceil(self.height / 2 - 1)
+        sx = x
+        sy = y
+        while path:
+            candidate: list[tuple[int, int, int, int, int, int]] = []
+            self.visited[y][x] = True
+            for direction in directions:
+                dy, dx, nb, ob = direction
+                nx = x + dx
+                ny = y + dy
+                if 0 <= nx < self.width and 0 <= ny < self.height:
+                    if not self.visited[ny][nx]:
+                        candidate.append((y, x, ny, nx, nb, ob))
+
+            if not candidate:
+                if not self.perfect:
+                    self.imperfect_insert(y, x)
+                while path and not path[-1]:
+                    path.pop()
+            else:
+                path.append(candidate)
+
+            while path and path[-1]:
+                idx = self.rng.randrange(len(path[-1]))
+                item = path[-1].pop(idx)
+                cy, cx, ny, nx, nb, ob = item
+                if not self.visited[ny][nx]:
+                    self.maze[cy][cx] -= nb
+                    self.maze[ny][nx] -= ob
+                    y, x = ny, nx
+                    if on_step is not None:
+                        on_step(x, y)
+                    break
+
+        if not self.perfect:
+            self.imperfect_insert(sy, sx)
 
     def generate(
         self, on_step: Callable[[int, int], None] | None = None
