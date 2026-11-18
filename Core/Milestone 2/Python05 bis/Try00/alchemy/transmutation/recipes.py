@@ -1,4 +1,4 @@
-from alchemy.potions import strength_potion
+from ..potions import strength_potion
 from ..elements import create_air
 from elements import create_fire
 
