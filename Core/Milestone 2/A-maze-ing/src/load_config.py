@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, ValidationError, model_validator
 import sys
 from typing import Any
+from header_file import StrategyType
 
 
 class Config(BaseModel):
@@ -13,16 +14,23 @@ class Config(BaseModel):
         exit: `(x, y)` coordinates of the maze exit.
         output_file: Output filename.
         perfect: Whether the maze is perfect.
+
+    Optional Argument Attributes:
+        strategy: Type of strategy used to generate the maze.
+        seed: Seed of the maze.
     """
-    
+
+    # Required attributes
     width: int = Field(ge=2, le=50)
     height: int = Field(ge=2, le=50)
     entry: tuple[int, int]
     exit: tuple[int, int]
     output_file: str = Field(min_length=4, max_length=20)
     perfect: bool
-    
-    strategy: 
+
+    # Optional argument attributes
+    strategy: StrategyType = StrategyType.DEPTH_FIRST_SEARCH
+    seed: int = 42
 
     @model_validator(mode="after")
     def check_entry(self) -> "Config":
@@ -93,6 +101,7 @@ def load_config() -> Config:
         for line in file_content:
             key, value = line.split("=", maxsplit=1)
             config_dict[key.strip()] = value.strip()
+
         config = Config(
             width=config_dict["WIDTH"],
             height=config_dict["HEIGHT"],
@@ -100,6 +109,8 @@ def load_config() -> Config:
             exit=config_dict["EXIT"].split(","),
             output_file=config_dict["OUTPUT_FILE"],
             perfect=config_dict["PERFECT"],
+            seed=int(config_dict.get("SEED")) if config_dict.get("SEED") else 42,
+            strategy=StrategyType(config_dict.get("STRATEGY")) if config_dict.get("STRATEGY") else StrategyType.DEPTH_FIRST_SEARCH
         )
     except FileNotFoundError as error:
         print(f"File Not Found, {error.strerror}: '{error.filename}'")

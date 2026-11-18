@@ -1,6 +1,7 @@
 from collections.abc import Callable
 import math
 import random
+from header_file import StrategyType
 
 
 class MazeGenerator:
@@ -15,7 +16,7 @@ class MazeGenerator:
         perfect: bool = False,
         color: int = 0,
         color_42: int = 96,
-        stragety: int = 0,
+        stragety: StrategyType = StrategyType.DEPTH_FIRST_SEARCH,
     ):
         self.width = width
         self.height = height
@@ -199,7 +200,6 @@ class MazeGenerator:
     def generate(
         self, on_step: Callable[[int, int], None] | None = None
     ) -> None:
-        stragety_list = [self.backtracking, self.hnk]
         for y in range(self.height):
             row: list[int] = []
             visited: list[bool] = []
@@ -210,7 +210,9 @@ class MazeGenerator:
             self.visited.append(visited)
         if self.width > 8 and self.height > 6:
             self.pattern_42()
-        if on_step:
-            stragety_list[self.strategy](on_step)
-        else:
-            stragety_list[self.strategy]()
+
+        # Run the given strategy
+        if self.strategy == StrategyType.DEPTH_FIRST_SEARCH:
+            self.backtracking(on_step)
+        elif self.strategy == StrategyType.HUNT_AND_KILL:
+            self.hnk(on_step)
