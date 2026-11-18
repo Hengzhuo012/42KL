@@ -8,7 +8,7 @@ from prompt import instruction
 
 
 def main() -> None:
-    prompt_status: bool = False
+    prompt_status: bool = True
     loop_strategy: bool = True
     animate: bool = True
     delay = 0.01
