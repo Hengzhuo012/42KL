@@ -10,18 +10,18 @@ class MazeGenerator:
         width: int,
         height: int,
         entry: tuple,
-        end: tuple,
+        exit: tuple,
         output_file: str,
         seed: int | None = None,
         perfect: bool = False,
         color: int = 0,
         color_42: int = 96,
-        stragety: StrategyType = StrategyType.DEPTH_FIRST_SEARCH,
+        strategy: StrategyType = StrategyType.DEPTH_FIRST_SEARCH,
     ):
         self.width = width
         self.height = height
         self.entry = entry
-        self.exit = end
+        self.exit = exit
         self.output_file = output_file
         self.seed = seed
         self.perfect = perfect
@@ -31,7 +31,7 @@ class MazeGenerator:
         self.cells_42: set[tuple[int, int]] = set()
         self.color = color
         self.color_42 = color_42
-        self.strategy = stragety
+        self.strategy = strategy
 
     def pattern_42(self) -> None:
         x: int = round(self.width / 2 - 1) - 3
@@ -63,35 +63,34 @@ class MazeGenerator:
     def imperfect_insert(self, y: int, x: int) -> None:
         directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
         edge_dead_end_open: list[tuple] = []
-        if not self.perfect:
-            if self.maze[y][x] in (7, 11, 13, 14):
-                for direction in directions:
-                    dy, dx, nb, ob = direction
-                    nx = x + dx
-                    ny = y + dy
-                    if (15 - self.maze[y][x]) == ob:
-                        if (
-                            0 <= nx < self.width
-                            and 0 <= ny < self.height
-                            and (ny, nx) not in self.cells_42
-                        ):
-                            self.maze[y][x] -= nb
-                            self.maze[ny][nx] -= ob
-                            break
-                    elif (
-                        self.maze[y][x] & nb
-                        and 0 <= nx < self.width
+        if self.maze[y][x] in (7, 11, 13, 14, 15):
+            for direction in directions:
+                dy, dx, nb, ob = direction
+                nx = x + dx
+                ny = y + dy
+                if (15 - self.maze[y][x]) == ob or self.maze[y][x] == 15:
+                    if (
+                        0 <= nx < self.width
                         and 0 <= ny < self.height
                         and (ny, nx) not in self.cells_42
                     ):
-                        edge_dead_end_open.append((y, x, ny, nx, nb, ob))
-                if self.maze[y][x] in (7, 11, 13, 14) and edge_dead_end_open:
-                    cy, cx, ny, nx, nb, ob = random.choice(edge_dead_end_open)
-                    self.maze[cy][cx] -= nb
-                    self.maze[ny][nx] -= ob
+                        self.maze[y][x] -= nb
+                        self.maze[ny][nx] -= ob
+                        break
+                elif (
+                    self.maze[y][x] & nb
+                    and 0 <= nx < self.width
+                    and 0 <= ny < self.height
+                    and (ny, nx) not in self.cells_42
+                ):
+                    edge_dead_end_open.append((y, x, ny, nx, nb, ob))
+            if self.maze[y][x] in (7, 11, 13, 14) and edge_dead_end_open:
+                cy, cx, ny, nx, nb, ob = random.choice(edge_dead_end_open)
+                self.maze[cy][cx] -= nb
+                self.maze[ny][nx] -= ob
 
     def backtracking(
-        self, on_step: Callable[[int, int], None] | None = None
+        self, animation: Callable[[int, int], None] | None = None
     ) -> None:
         directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
         path: list[list[tuple[int, int, int, int, int, int]]] = [[]]
@@ -122,7 +121,6 @@ class MazeGenerator:
                 path.append(candidate)
 
             while path and path[-1]:
-                
                 idx = self.rng.randrange(len(path[-1]))
                 item = path[-1].pop(idx)
                 cy, cx, ny, nx, nb, ob = item
@@ -130,14 +128,14 @@ class MazeGenerator:
                     self.maze[cy][cx] -= nb
                     self.maze[ny][nx] -= ob
                     y, x = ny, nx
-                    if on_step is not None:
-                        on_step(x, y)
+                    if animation is not None:
+                        animation(x, y)
                     break
 
         if not self.perfect:
             self.imperfect_insert(sy, sx)
 
-    def hnk(self, on_step: Callable[[int, int], None] | None = None) -> None:
+    def hnk(self, animation: Callable[[int, int], None] | None = None) -> None:
         directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
         x: int = self.rng.randint(0, self.width - 1)
         y: int = self.rng.randint(0, self.height - 1)
@@ -195,57 +193,11 @@ class MazeGenerator:
                     self.maze[cy][cx] -= nb
                     self.maze[ny][nx] -= ob
                     y, x = ny, nx
-                    if on_step is not None:
-                        on_step(x, y)
-
-    def growing_tree(
-        self, on_step: Callable[[int, int], None] | None = None
-    ) -> None:
-        directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
-        path: list[list[tuple[int, int, int, int, int, int]]] = [[]]
-        x: int = self.rng.randint(0, self.width - 1)
-        y: int = self.rng.randint(0, self.height - 1)
-        if (y, x) in self.cells_42:
-            x = round(self.width / 2 - 1)
-            y = math.ceil(self.height / 2 - 1)
-        sx = x
-        sy = y
-        while path:
-            candidate: list[tuple[int, int, int, int, int, int]] = []
-            self.visited[y][x] = True
-            for direction in directions:
-                dy, dx, nb, ob = direction
-                nx = x + dx
-                ny = y + dy
-                if 0 <= nx < self.width and 0 <= ny < self.height:
-                    if not self.visited[ny][nx]:
-                        candidate.append((y, x, ny, nx, nb, ob))
-
-            if not candidate:
-                if not self.perfect:
-                    self.imperfect_insert(y, x)
-                while path and not path[-1]:
-                    path.pop()
-            else:
-                path.append(candidate)
-
-            while path and path[-1]:
-                idx = self.rng.randrange(len(path[-1]))
-                item = path[-1].pop(idx)
-                cy, cx, ny, nx, nb, ob = item
-                if not self.visited[ny][nx]:
-                    self.maze[cy][cx] -= nb
-                    self.maze[ny][nx] -= ob
-                    y, x = ny, nx
-                    if on_step is not None:
-                        on_step(x, y)
-                    break
-
-        if not self.perfect:
-            self.imperfect_insert(sy, sx)
+                    if animation is not None:
+                        animation(x, y)
 
     def generate(
-        self, on_step: Callable[[int, int], None] | None = None
+        self, animation: Callable[[int, int], None] | None = None
     ) -> None:
         for y in range(self.height):
             row: list[int] = []
@@ -257,9 +209,7 @@ class MazeGenerator:
             self.visited.append(visited)
         if self.width > 8 and self.height > 6:
             self.pattern_42()
-
-        # Run the given strategy
         if self.strategy == StrategyType.DEPTH_FIRST_SEARCH:
-            self.backtracking(on_step)
+            self.backtracking(animation)
         elif self.strategy == StrategyType.HUNT_AND_KILL:
-            self.hnk(on_step)
+            self.hnk(animation)
