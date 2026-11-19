@@ -24,10 +24,10 @@ install:
 	uv sync
 
 run:
-	uv run python src/amazing.py config.txt
+	uv run python src/a_maze_ing.py config.txt
 
 debug:
-	uv run python -m pdb src/amazing.py config.txt
+	uv run python -m pdb src/a_maze_ing.py config.txt
 
 lint:
 	uv run flake8 . 

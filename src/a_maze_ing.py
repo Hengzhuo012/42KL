@@ -16,7 +16,7 @@ def main() -> None:
         width=config.width,
         height=config.height,
         entry=config.entry,
-        end=config.exit,
+        exit=config.exit,
         output_file=config.output_file,
         seed=config.seed,
         perfect=config.perfect,
@@ -33,11 +33,11 @@ def main() -> None:
             width=config.width,
             height=config.height,
             entry=config.entry,
-            end=config.end,
+            exit=config.exit,
             output_file=config.output_file,
             seed=config.seed,
             perfect=config.perfect,
-            stragety=config.strategy,
+            strategy=config.strategy,
         )
         print("\033[2J\033[H", end="")
         if animate:
