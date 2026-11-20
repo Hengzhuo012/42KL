@@ -26,8 +26,8 @@ def get_next_valid_cells(
         current_cell_x = current_cell[0]
         current_cell_y = current_cell[1]
         maze_wall = maze[current_cell_y][current_cell_x]
-        directions = ((0, -1), (1, 0), (0, 1), (-1, 0))
-        for i, (dx, dy) in enumerate(directions):
+        direction_offset = ((0, -1), (1, 0), (0, 1), (-1, 0))
+        for i, (dx, dy) in enumerate(direction_offset):
             next_cell: Coord = (current_cell_x + dx,
                                 current_cell_y + dy)
             # Check if the cell is out of bound
@@ -98,14 +98,15 @@ def breadth_first_search(
     path_to_exit = list(reversed(path_to_exit))
 
     # convert the path into string of directions
-    directions_str = {
+    direction_str_by_offset = {
         (0, -1): "N",
         (1, 0): "E",
         (0, 1): "S",
         (-1, 0): "W",
     }
-    return "".join(
-        directions_str[(next_x - curr_x, next_y - curr_y)]
+    direction_str: str = "".join(
+        direction_str_by_offset[(next_x - curr_x, next_y - curr_y)]
         for (curr_x, curr_y), (next_x, next_y)
         in zip(path_to_exit, path_to_exit[1:])
     )
+    return direction_str
