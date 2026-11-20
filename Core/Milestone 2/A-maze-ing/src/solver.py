@@ -1,20 +1,6 @@
 Coord = tuple[int, int]
 
 
-def is_solved(exit: Coord, visited_cells: set[Coord]) -> bool:
-    """Check if it visited exit before
-    Args:
-        exit: `(x, y)` coordinates of the maze exit.
-        visited_cells: set of `(x, y)` coordiantes visited
-
-    Return:
-        boolean value that if set visited_cells contained exit
-    """
-    if exit in visited_cells:
-        return True
-    return False
-
-
 def get_next_valid_cells(
         maze: list[list[int]],
         visited_cells: set[Coord],
@@ -89,7 +75,7 @@ def breadth_first_search(
         cells_to_check={entry}
     )
 
-    while (not is_solved(exit, visited_cells)) and next_valid_cells:
+    while (exit not in visited_cells) and next_valid_cells:
         last_visited: set[Coord] = next_valid_cells
         next_valid_cells = get_next_valid_cells(
             maze=maze,
@@ -98,7 +84,7 @@ def breadth_first_search(
             cells_to_check=last_visited
         )
 
-    if not is_solved(exit, visited_cells):
+    if exit not in visited_cells:
         return None
 
     path_to_exit: list[Coord] = [exit]
