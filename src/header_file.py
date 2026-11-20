@@ -3,6 +3,7 @@ from enum import Enum
 
 class StrategyType(Enum):
     """Enumerator for strategy type"""
+
     DEPTH_FIRST_SEARCH = "depth_first_search"
     HUNT_AND_KILL = "hunt_and_kill"
 

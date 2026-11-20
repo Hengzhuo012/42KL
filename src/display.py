@@ -2,7 +2,8 @@ from mazegen import MazeGenerator
 
 
 def output(
-    maze: MazeGenerator, highlight: tuple[int, int] | None = None
+    maze: MazeGenerator,
+    highlight: list[tuple[int, int]] | None = None,
 ) -> str:
     total_maze: list[str] = []
     color_list: list[int] = [97, 90, 91, 92, 93, 94, 95, 96]
@@ -37,43 +38,67 @@ def output(
                     to_print2.append("\033[92m██\033[0m")
                 elif (x, y) == maze.entry:
                     to_print2.append("\033[91m██\033[0m")
-                elif (x, y) == highlight:
+                elif highlight and (x, y) in highlight:
                     to_print2.append("\033[93m██\033[0m")
                 else:
                     to_print2.append("  ")
             elif column & 1 and not column & 8:
                 to_print1.append(f"\033[{color}m██\033[0m")
                 to_print1.append(f"\033[{color}m██\033[0m")
-                to_print2.append(f"\033[{color}m  \033[0m")
+                if highlight and (x, y) in highlight:
+                    if 0 <= (x - 1) and (x - 1, y) in highlight:
+                        to_print2.append("\033[93m██\033[0m")
+                    else:
+                        to_print2.append(f"\033[{color}m  \033[0m")
+                else:
+                    to_print2.append(f"\033[{color}m  \033[0m")
                 if (x, y) == maze.exit:
-                    to_print2.append("\033[95m██\033[0m")
+                    to_print2.append("\033[92m██\033[0m")
                 elif (x, y) == maze.entry:
                     to_print2.append("\033[91m██\033[0m")
-                elif (x, y) == highlight:
+                elif highlight and (x, y) in highlight:
                     to_print2.append("\033[93m██\033[0m")
                 else:
                     to_print2.append("  ")
             elif not column & 1 and column & 8:
                 to_print1.append(f"\033[{color}m██\033[0m")
-                to_print1.append(f"\033[{color}m  \033[0m")
+                if highlight and (x, y) in highlight:
+                    if 0 <= (y - 1) and (x, y - 1) in highlight:
+                        to_print1.append("\033[93m██\033[0m")
+                    else:
+                        to_print1.append(f"\033[{color}m  \033[0m")
+                else:
+                    to_print1.append(f"\033[{color}m  \033[0m")
                 to_print2.append(f"\033[{color}m██\033[0m")
                 if (x, y) == maze.exit:
                     to_print2.append("\033[92m██\033[0m")
                 elif (x, y) == maze.entry:
                     to_print2.append("\033[91m██\033[0m")
-                elif (x, y) == highlight:
+                elif highlight and (x, y) in highlight:
                     to_print2.append("\033[93m██\033[0m")
                 else:
                     to_print2.append("  ")
             else:
                 to_print1.append(f"\033[{color}m██\033[0m")
-                to_print1.append("  ")
-                to_print2.append("  ")
+                if highlight and (x, y) in highlight:
+                    if 0 <= (y - 1) and (x, y - 1) in highlight:
+                        to_print1.append("\033[93m██\033[0m")
+                    else:
+                        to_print1.append(f"\033[{color}m  \033[0m")
+                else:
+                    to_print1.append(f"\033[{color}m  \033[0m")
+                if highlight and (x, y) in highlight:
+                    if 0 <= (x - 1) and (x - 1, y) in highlight:
+                        to_print2.append("\033[93m██\033[0m")
+                    else:
+                        to_print2.append(f"\033[{color}m  \033[0m")
+                else:
+                    to_print2.append(f"\033[{color}m  \033[0m")
                 if (x, y) == maze.exit:
                     to_print2.append("\033[92m██\033[0m")
                 elif (x, y) == maze.entry:
                     to_print2.append("\033[91m██\033[0m")
-                elif (x, y) == highlight:
+                elif highlight and (x, y) in highlight:
                     to_print2.append("\033[93m██\033[0m")
                 else:
                     to_print2.append("  ")
