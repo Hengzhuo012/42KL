@@ -54,7 +54,7 @@ def breadth_first_search(
     entry: Coord,
     exit: Coord,
     maze: list[list[int]]
-) -> list[Coord] | None:
+) -> str | None:
     """Algorithm breadth first search used to solve the maze
 
     Args:
@@ -63,7 +63,7 @@ def breadth_first_search(
         maze: 2D-list of the wall-condition of each coordinates.
 
     Return:
-        A 2D-list of the shortest path from entry to exit
+        A string of directions for the shortest path from entry to exit
     """
 
     prev_cells_dict: dict[Coord, Coord] = {}
@@ -75,6 +75,7 @@ def breadth_first_search(
         cells_to_check={entry}
     )
 
+    # get a connection from entry to exit
     while (exit not in visited_cells) and next_valid_cells:
         last_visited: set[Coord] = next_valid_cells
         next_valid_cells = get_next_valid_cells(
@@ -84,13 +85,27 @@ def breadth_first_search(
             cells_to_check=last_visited
         )
 
+    # return None if there is no available path
     if exit not in visited_cells:
         return None
 
+    # get the path from entry to exit
     path_to_exit: list[Coord] = [exit]
     current_cell: Coord = exit
     while current_cell != entry:
         current_cell = prev_cells_dict[current_cell]
         path_to_exit.append(current_cell)
+    path_to_exit = list(reversed(path_to_exit))
 
-    return list(reversed(path_to_exit))
+    # convert the path into string of directions
+    directions_str = {
+        (0, -1): "N",
+        (1, 0): "E",
+        (0, 1): "S",
+        (-1, 0): "W",
+    }
+    return "".join(
+        directions_str[(next_x - curr_x, next_y - curr_y)]
+        for (curr_x, curr_y), (next_x, next_y)
+        in zip(path_to_exit, path_to_exit[1:])
+    )

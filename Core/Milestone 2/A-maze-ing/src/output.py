@@ -1,7 +1,7 @@
 from mazegen import MazeGenerator
 
 
-def output_maze(maze: MazeGenerator) -> None:
+def output_maze(maze: MazeGenerator, directions: str) -> None:
     with open(f"{maze.output_file}", "w") as fd:
         for y in range(maze.height):
             output: list[str] = []
@@ -16,3 +16,4 @@ def output_maze(maze: MazeGenerator) -> None:
         x2, y2 = maze.exit
         fd.write(f"{x1},{y1}\n")
         fd.write(f"{x2},{y2}\n")
+        fd.write(directions)
