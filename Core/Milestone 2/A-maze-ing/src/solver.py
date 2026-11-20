@@ -1,11 +1,13 @@
+from collections.abc import Callable
+
 Coord = tuple[int, int]
 
 
 def get_next_valid_cells(
-        maze: list[list[int]],
-        visited_cells: set[Coord],
-        prev_cells_dict: dict[Coord, Coord],
-        cells_to_check: set[Coord]
+    maze: list[list[int]],
+    visited_cells: set[Coord],
+    prev_cells_dict: dict[Coord, Coord],
+    cells_to_check: set[Coord],
 ) -> set[Coord]:
     """Return valid adjacent cells not blocked by walls or visited.
 
@@ -31,8 +33,10 @@ def get_next_valid_cells(
             next_cell: Coord = (current_cell_x + dx,
                                 current_cell_y + dy)
             # Check if the cell is out of bound
-            if not (0 <= next_cell[0] < maze_width
-                    and 0 <= next_cell[1] < maze_height):
+            if not (
+                0 <= next_cell[0] < maze_width
+                and 0 <= next_cell[1] < maze_height
+            ):
                 continue
 
             # Check if there is wall in between
@@ -53,8 +57,9 @@ def get_next_valid_cells(
 def breadth_first_search(
     entry: Coord,
     exit: Coord,
-    maze: list[list[int]]
-) -> str | None:
+    maze: list[list[int]],
+    animation: Callable[[list[tuple[int, int]]], None] | None = None,
+) -> tuple[str, list[tuple[int, int]]] | None:
     """Algorithm breadth first search used to solve the maze
 
     Args:
@@ -68,12 +73,16 @@ def breadth_first_search(
 
     prev_cells_dict: dict[Coord, Coord] = {}
     visited_cells: set[Coord] = {entry}
+    to_print: list[tuple[int, int]] = []
     next_valid_cells: set[Coord] = get_next_valid_cells(
         maze=maze,
         visited_cells=visited_cells,
         prev_cells_dict=prev_cells_dict,
-        cells_to_check={entry}
+        cells_to_check={entry},
     )
+
+    to_print.extend(sorted(next_valid_cells))
+    animation(to_print) if animation else None
 
     # get a connection from entry to exit
     while (exit not in visited_cells) and next_valid_cells:
@@ -82,8 +91,11 @@ def breadth_first_search(
             maze=maze,
             visited_cells=visited_cells,
             prev_cells_dict=prev_cells_dict,
-            cells_to_check=last_visited
+            cells_to_check=last_visited,
         )
+        to_print.append(entry)
+        to_print.extend(sorted(next_valid_cells))
+        animation(to_print) if animation else None
 
     # return None if there is no available path
     if exit not in visited_cells:
@@ -109,4 +121,5 @@ def breadth_first_search(
         for (curr_x, curr_y), (next_x, next_y)
         in zip(path_to_exit, path_to_exit[1:])
     )
-    return direction_str
+
+    return (direction_str, path_to_exit)

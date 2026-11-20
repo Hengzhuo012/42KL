@@ -21,8 +21,8 @@ class Config(BaseModel):
     """
 
     # Required attributes
-    width: int = Field(ge=2, le=50)
-    height: int = Field(ge=2, le=50)
+    width: int = Field(ge=2, le=100)
+    height: int = Field(ge=2, le=100)
     entry: tuple[int, int]
     exit: tuple[int, int]
     output_file: str = Field(min_length=4, max_length=20)
@@ -109,8 +109,12 @@ def load_config() -> Config:
             exit=config_dict["EXIT"].split(","),
             output_file=config_dict["OUTPUT_FILE"],
             perfect=config_dict["PERFECT"],
-            seed=int(config_dict.get("SEED")) if config_dict.get("SEED") else 42,
-            strategy=StrategyType(config_dict.get("STRATEGY")) if config_dict.get("STRATEGY") else StrategyType.DEPTH_FIRST_SEARCH
+            seed=int(config_dict.get("SEED"))
+            if config_dict.get("SEED")
+            else 42,
+            strategy=StrategyType(config_dict.get("STRATEGY"))
+            if config_dict.get("STRATEGY")
+            else StrategyType.DEPTH_FIRST_SEARCH,
         )
     except FileNotFoundError as error:
         print(f"File Not Found, {error.strerror}: '{error.filename}'")

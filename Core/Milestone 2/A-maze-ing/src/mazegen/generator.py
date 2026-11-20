@@ -90,7 +90,7 @@ class MazeGenerator:
                 self.maze[ny][nx] -= ob
 
     def backtracking(
-        self, animation: Callable[[int, int], None] | None = None
+        self, animation: Callable[[list[tuple[int, int]]], None] | None = None
     ) -> None:
         directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
         path: list[list[tuple[int, int, int, int, int, int]]] = [[]]
@@ -129,13 +129,15 @@ class MazeGenerator:
                     self.maze[ny][nx] -= ob
                     y, x = ny, nx
                     if animation is not None:
-                        animation(x, y)
+                        animation([(x, y)])
                     break
 
         if not self.perfect:
             self.imperfect_insert(sy, sx)
 
-    def hnk(self, animation: Callable[[int, int], None] | None = None) -> None:
+    def hnk(
+        self, animation: Callable[[list[tuple[int, int]]], None] | None = None
+    ) -> None:
         directions = [(-1, 0, 1, 4), (0, 1, 2, 8), (1, 0, 4, 1), (0, -1, 8, 2)]
         x: int = self.rng.randint(0, self.width - 1)
         y: int = self.rng.randint(0, self.height - 1)
@@ -194,10 +196,10 @@ class MazeGenerator:
                     self.maze[ny][nx] -= ob
                     y, x = ny, nx
                     if animation is not None:
-                        animation(x, y)
+                        animation([(x, y)])
 
     def generate(
-        self, animation: Callable[[int, int], None] | None = None
+        self, animation: Callable[[list[tuple[int, int]]], None] | None = None
     ) -> None:
         for y in range(self.height):
             row: list[int] = []

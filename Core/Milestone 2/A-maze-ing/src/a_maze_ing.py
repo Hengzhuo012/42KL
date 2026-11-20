@@ -2,14 +2,15 @@ from mazegen import MazeGenerator
 import display
 from output import output_maze
 import time
-import subprocess
 from prompt import instruction
 from load_config import load_config
+from solver import breadth_first_search
+import random
 
 
 def main() -> None:
     config = load_config()
-    prompt_status: bool = True
+    prompt_status: bool = False
     animate: bool = True
     delay: float = 0.01
     generator = MazeGenerator(
@@ -23,8 +24,8 @@ def main() -> None:
         strategy=config.strategy,
     )
 
-    def my_draw(y: int, x: int) -> None:
-        frame = display.output(generator, highlight=(y, x))
+    def my_draw(highlight: list[tuple[int, int]]) -> None:
+        frame = display.output(generator, highlight=highlight)
         print("\033[H" + frame, end="", flush=True)
         time.sleep(delay)
 
@@ -44,16 +45,33 @@ def main() -> None:
             generator.generate(my_draw)
         else:
             generator.generate()
-        print(display.output(generator))
-        output_maze(generator)
-        result = subprocess.run(
-            ["make", "check"], capture_output=True, text=True
-        )
-        print(result.stdout)
+
+        answer: str | None = None
+        if animate:
+            result = breadth_first_search(
+                generator.entry, generator.exit, generator.maze, my_draw
+            )
+        else:
+            result = breadth_first_search(
+                generator.entry, generator.exit, generator.maze
+            )
+        output_maze(generator, answer)
+        try:
+            if result is None:
+                raise Exception
+            else:
+                answer, solve_path = result
+        except Exception:
+            print("No valid path to exit")
+        print("\033[2J\033[H", end="")
+        print(display.output(generator, solve_path))
         time.sleep(5.0)
         # break
+        config.strategy = config.strategy.next()
         if not prompt_status:
             config.strategy.next()
+            config.seed = random.randint(0, 9999)
+            config.perfect = random.choice([True, False])
             continue
         if prompt_status:
             config.seed, config.strategy, config.perfect = instruction(

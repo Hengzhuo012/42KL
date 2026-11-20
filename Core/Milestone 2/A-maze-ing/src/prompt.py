@@ -2,11 +2,12 @@ import sys
 from mazegen import MazeGenerator
 import random
 import display
+from load_config import StrategyType
 
 
 def instruction(
-    maze: MazeGenerator, seed: int, strategy: int, perfect: bool
-) -> tuple[int, int, bool]:
+    maze: MazeGenerator, seed: int, strategy: StrategyType, perfect: bool
+) -> tuple[int, StrategyType, bool]:
     print(f"\033[{maze.height * 2 + 9};1H\033[J", end="")
     print(f"1. Enter '1' to change seed.  Seed number: {maze.seed}")
     maze_type = "Perfect" if maze.perfect else "Imperfect"
@@ -47,7 +48,7 @@ def instruction(
                 maze.color_42 = int(input("Color: "))
                 print(display.output(maze))
             elif user_input1 == "5":
-                strategy = (strategy + 1) % 2
+                strategy = strategy.next()
                 break
             else:
                 break
